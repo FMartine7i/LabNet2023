@@ -11,6 +11,7 @@ namespace Lab.EF.Logic
         void Add(T item);
 
         void Delete(int ID);
+
         void Update(T categories);
     }
 }

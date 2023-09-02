@@ -11,6 +11,40 @@ namespace Lab.EF.UI
             InitializeComponent();
         }
 
+        #region Activacion GroupBoxes
+        private void RBEmployees_CheckedChanged(object sender, EventArgs e)
+        {
+            GBEmployees.Enabled = RBEmployees.Checked;
+            GBCategories.Enabled = false;
+            GBShippers.Enabled = false;
+        }
+
+        private void RBCategories_CheckedChanged(object sender, EventArgs e)
+        {
+            GBCategories.Enabled = RBCategories.Checked;
+            GBEmployees.Enabled = false;
+            GBShippers.Enabled = false;
+        }
+
+        private void RBShippers_CheckedChanged(object sender, EventArgs e)
+        {
+            GBShippers.Enabled = RBShippers.Checked;
+            GBCategories.Enabled = false;
+            GBEmployees.Enabled = false;
+        }
+        #endregion
+
+        #region funciones
+        public void LimpiarScreen()
+        {
+            TBCompany.Clear();
+            TName1.Clear();
+            TBName2.Clear();
+            TDescription.Clear();
+            TBLastName.Clear();
+        }
+        #endregion
+
         private void BMostrar_Click(object sender, EventArgs e)
         {
 
@@ -59,7 +93,7 @@ namespace Lab.EF.UI
         {
             if (RBCategories.Checked == true)
             {
-                if (TName.Text.Length == 0)
+                if (TBName2.Text.Length == 0)
                 {
                     MessageBox.Show("El campo 'Nombre' está vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -67,31 +101,21 @@ namespace Lab.EF.UI
                 {
                     MessageBox.Show("El campo 'Descripción' está vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else if (TBLastName.Text.Length > 0)
-                {
-                    MessageBox.Show("El campo 'Apellido' no está disponible para la entidad 'Categorías'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    TBLastName.Clear();
-                }
-                else if (TBCompany.Text.Length > 0)
-                {
-                    MessageBox.Show("El campo 'Compañía' no está disponible para la entidad 'Categorías'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    TBCompany.Clear();
-                }
                 else
                 {
                     CategoriesLogic categoriesLogic = new CategoriesLogic();
 
                     categoriesLogic.Add(new Categories
                     {
-                        CategoryID = Convert.ToInt32(NUD_ID.Value),
-                        CategoryName = TName.Text,
+                        CategoryID = Convert.ToInt32(NUD_IDCat.Value),
+                        CategoryName = TBName2.Text,
                         Description = TDescription.Text,
                     });
                 }
             }
             else if (RBEmployees.Checked == true)
             {
-                if (TName.Text.Length == 0)
+                if (TName1.Text.Length == 0)
                 {
                     MessageBox.Show("El campo 'Nombre' está vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -99,78 +123,56 @@ namespace Lab.EF.UI
                 {
                     MessageBox.Show("El campo 'Apellido' está vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else if (TDescription.Text.Length > 0)
-                {
-                    MessageBox.Show("El campo 'Descripción' no está disponible para la entidad 'Empleados'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    TDescription.Clear();
-                }
-                else if (TBCompany.Text.Length > 0)
-                {
-                    MessageBox.Show("El campo 'Compañía' no está disponible para la entidad 'Empleados'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    TBCompany.Clear();
-                }
                 else
                 {
                     EmployeesLogic employeesLogic = new EmployeesLogic();
 
                     employeesLogic.Add(new Employees
                     {
-                        EmployeeID = Convert.ToInt32(NUD_ID.Value),
-                        FirstName = TName.Text,
+                        EmployeeID = Convert.ToInt32(NUD_IDEmp.Value),
+                        FirstName = TName1.Text,
                         LastName = TBLastName.Text,
                     });
                 }
             }
             else
             {
-                if (TName.Text.Length > 0)
-                {
-                    MessageBox.Show("El campo 'Nombre' está vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    TName.Clear();
-                }
-                else if (TBLastName.Text.Length > 0)
-                {
-                    MessageBox.Show("El campo 'Apellido' no está disponible para la entidad 'Categorías'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    TDescription.Clear();
-                }
-                else if (TBCompany.Text.Length == 0)
-                {
+                if (TBCompany.Text.Length == 0)
                     MessageBox.Show("El campo 'Compañía' está vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
                 else
                 {
                     ShippersLogic shippersLogic = new ShippersLogic();
 
                     shippersLogic.Add(new Shippers
                     {
-                        ShipperID = Convert.ToInt32(NUD_ID.Value),
+                        ShipperID = Convert.ToInt32(NUD_IDShip.Value),
                         CompanyName = TBCompany.Text,
                     });
                 }
             }
+
+            LimpiarScreen();
         }
 
         private void BDelete_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(NUD_ID.Value);
-
             if (RBCategories.Checked == true)
             {
                 CategoriesLogic categoriesLogic = new CategoriesLogic();
 
-                categoriesLogic.Delete(id);
+                categoriesLogic.Delete(Convert.ToInt32(NUD_IDCat.Value));
             }
             else if (RBEmployees.Checked == true)
             {
                 EmployeesLogic employeesLogic = new EmployeesLogic();
 
-                employeesLogic.Delete(id);
+                employeesLogic.Delete(Convert.ToInt32(NUD_IDEmp.Value));
             }
             else
             {
                 ShippersLogic shippersLogic = new ShippersLogic();
 
-                shippersLogic.Delete(id);
+                shippersLogic.Delete(Convert.ToInt32(NUD_IDShip.Value));
             }
         }
 
@@ -179,19 +181,7 @@ namespace Lab.EF.UI
             if (RBCategories.Checked == true)
             {
                 if (TDescription.Text.Length == 0)
-                {
                     MessageBox.Show("El campo 'Descripción' está vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (TBLastName.Text.Length > 0)
-                {
-                    MessageBox.Show("El campo 'Apellido' no está disponible para la entidad 'Categorías'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    TDescription.Clear();
-                }
-                else if (TBCompany.Text.Length > 0)
-                {
-                    MessageBox.Show("El campo 'Compañía' no está disponible para la entidad 'Categorías'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    TBCompany.Clear();
-                }
                 else
                 {
                     CategoriesLogic categoriesLogic = new CategoriesLogic();
@@ -199,25 +189,16 @@ namespace Lab.EF.UI
                     categoriesLogic.Update(new Categories
                     {
                         Description = TDescription.Text,
-                        CategoryID = Convert.ToInt32(NUD_ID.Value)
+                        CategoryID = Convert.ToInt32(NUD_IDEmp.Value)
                     });
                 }
             }
             else if (RBEmployees.Checked == true)
             {
-                if (TDescription.Text.Length > 0)
-                {
-                    MessageBox.Show("El campo 'Descripción' no está disponible para la entidad 'Empleados'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (TBLastName.Text.Length == 0)
+                if (TBLastName.Text.Length == 0)
                 {
                     MessageBox.Show("El campo 'Apellido' está vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     TDescription.Clear();
-                }
-                else if (TBCompany.Text.Length > 0)
-                {
-                    MessageBox.Show("El campo 'Compañía' no está disponible para la entidad 'Empleados'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    TBCompany.Clear();
                 }
                 else
                 {
@@ -225,8 +206,8 @@ namespace Lab.EF.UI
 
                     employeesLogic.Update(new Employees
                     {
-                        EmployeeID = Convert.ToInt32(NUD_ID.Value),
-                        FirstName = TName.Text,
+                        EmployeeID = Convert.ToInt32(NUD_IDEmp.Value),
+                        FirstName = TName1.Text,
                         LastName = TBLastName.Text,
                     });
                 }
@@ -234,19 +215,8 @@ namespace Lab.EF.UI
             else
             {
                 if (TDescription.Text.Length == 0)
-                {
                     MessageBox.Show("El campo 'Descripción' no está disponible para la entidad 'Expedidores'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else if (TBLastName.Text.Length > 0)
-                {
-                    MessageBox.Show("El campo 'Apellido' no está disponible para la entidad 'Expedidores'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    TDescription.Clear();
-                }
-                else if (TName.Text.Length > 0)
-                {
-                    MessageBox.Show("El campo 'Nombre' no está disponible para la entidad 'Expedidores'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    TDescription.Clear();
-                }
+
                 else if (TBCompany.Text.Length == 0)
                 {
                     MessageBox.Show("El campo 'Compañía' está vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -258,11 +228,12 @@ namespace Lab.EF.UI
 
                     shippersLogic.Update(new Shippers
                     {
-                        ShipperID = Convert.ToInt32(NUD_ID.Value),
+                        ShipperID = Convert.ToInt32(NUD_IDEmp.Value),
                         CompanyName = TBCompany.Text,
                     });
                 }
             }
+            LimpiarScreen();
         }
 
         private void BClose_Click(object sender, EventArgs e)

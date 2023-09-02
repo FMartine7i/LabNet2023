@@ -8,14 +8,21 @@ namespace Lab.EF.Logic
 {
     public class EmployeesLogic : BaseLogic, IABMLogic<Employees>
     {
-        public void Add(Employees item)
+        public void Add(Employees newEmployee)
         {
-            throw new NotImplementedException();
+            context.Employees.Add(newEmployee);
+            context.SaveChanges();
         }
 
         public void Delete(int ID)
         {
-            throw new NotImplementedException();
+            var employeeToDelete = context.Employees.SingleOrDefault(e => e.EmployeeID == ID);
+
+            if (employeeToDelete != null)
+            {
+                context.Employees.Remove(employeeToDelete);
+                context.SaveChanges();
+            }
         }
 
         public List<Employees> GetAll()
