@@ -3,7 +3,6 @@ using Lab.EF.Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Lab.EF.UnitTest
 {

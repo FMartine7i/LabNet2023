@@ -1,7 +1,5 @@
 using Lab.EF.Logic;
 using Lab.EF.Entities;
-using Lab.EF.Data;
-using System;
 
 namespace Lab.EF.UI
 {
@@ -106,7 +104,7 @@ namespace Lab.EF.UI
                 {
                     MessageBox.Show("El campo 'Descripción' está vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else if (!categoriesLogic.CategoryExists(idCat))
+                else if (categoriesLogic.CategoryExists(idCat))
                 {
                     MessageBox.Show("La ID ya existe", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
