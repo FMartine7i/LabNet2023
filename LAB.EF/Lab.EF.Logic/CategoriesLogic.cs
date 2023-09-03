@@ -40,5 +40,13 @@ namespace Lab.EF.Logic
 
             context.SaveChanges();
         }
+
+        public bool CategoryExists(int categoryID)
+        {
+            using (var dbContext = new NorthwindContext()) 
+            {
+                return dbContext.Categories.Any(c => c.CategoryID == categoryID);
+            }
+        }
     }
 }

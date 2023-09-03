@@ -8,6 +8,16 @@ namespace Lab.EF.UnitTest
 {
     public class TestCategory
     {
+        public static void PruebaIngresar()
+        {
+            try
+            {
 
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

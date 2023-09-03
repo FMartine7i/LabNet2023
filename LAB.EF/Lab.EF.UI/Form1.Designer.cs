@@ -225,7 +225,7 @@
             TBName2.BackColor = Color.FromArgb(45, 40, 48);
             TBName2.BorderStyle = BorderStyle.FixedSingle;
             TBName2.ForeColor = Color.FromArgb(181, 122, 235);
-            TBName2.Location = new Point(122, 68);
+            TBName2.Location = new Point(122, 70);
             TBName2.Name = "TBName2";
             TBName2.Size = new Size(135, 26);
             TBName2.TabIndex = 8;
@@ -244,7 +244,7 @@
             // 
             LName2.AutoSize = true;
             LName2.BackColor = Color.Transparent;
-            LName2.Location = new Point(43, 70);
+            LName2.Location = new Point(44, 72);
             LName2.Name = "LName2";
             LName2.Size = new Size(72, 20);
             LName2.TabIndex = 6;
