@@ -117,10 +117,12 @@
             // 
             RBCategories.AutoSize = true;
             RBCategories.BackColor = Color.Transparent;
-            RBCategories.Location = new Point(215, 34);
+            RBCategories.Checked = true;
+            RBCategories.Location = new Point(66, 34);
             RBCategories.Name = "RBCategories";
             RBCategories.Size = new Size(108, 24);
             RBCategories.TabIndex = 1;
+            RBCategories.TabStop = true;
             RBCategories.Text = "Categorías";
             RBCategories.UseVisualStyleBackColor = false;
             RBCategories.CheckedChanged += RBCategories_CheckedChanged;
@@ -129,12 +131,10 @@
             // 
             RBEmployees.AutoSize = true;
             RBEmployees.BackColor = Color.Transparent;
-            RBEmployees.Checked = true;
-            RBEmployees.Location = new Point(64, 34);
+            RBEmployees.Location = new Point(217, 34);
             RBEmployees.Name = "RBEmployees";
             RBEmployees.Size = new Size(107, 24);
             RBEmployees.TabIndex = 0;
-            RBEmployees.TabStop = true;
             RBEmployees.Text = "Empleados";
             RBEmployees.UseVisualStyleBackColor = false;
             RBEmployees.CheckedChanged += RBEmployees_CheckedChanged;
@@ -211,9 +211,8 @@
             GBCategories.Controls.Add(LDescription);
             GBCategories.Controls.Add(NUD_IDCat);
             GBCategories.Controls.Add(TDescription);
-            GBCategories.Enabled = false;
             GBCategories.ForeColor = Color.FromArgb(233, 130, 240);
-            GBCategories.Location = new Point(303, 29);
+            GBCategories.Location = new Point(27, 29);
             GBCategories.Name = "GBCategories";
             GBCategories.Size = new Size(275, 157);
             GBCategories.TabIndex = 12;
@@ -290,8 +289,9 @@
             GBEmployees.Controls.Add(TBLastName);
             GBEmployees.Controls.Add(LName1);
             GBEmployees.Controls.Add(LLastName);
+            GBEmployees.Enabled = false;
             GBEmployees.ForeColor = Color.FromArgb(233, 130, 240);
-            GBEmployees.Location = new Point(23, 29);
+            GBEmployees.Location = new Point(322, 29);
             GBEmployees.Name = "GBEmployees";
             GBEmployees.Size = new Size(258, 157);
             GBEmployees.TabIndex = 3;

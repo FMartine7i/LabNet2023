@@ -1,6 +1,7 @@
 using Lab.EF.Logic;
 using Lab.EF.Entities;
 using Lab.EF.Data;
+using System;
 
 namespace Lab.EF.UI
 {
@@ -91,6 +92,10 @@ namespace Lab.EF.UI
 
         private void BAdd_Click(object sender, EventArgs e)
         {
+            int idCat = Convert.ToInt32(NUD_IDCat.Value);
+
+            CategoriesLogic categoriesLogic = new CategoriesLogic();
+
             if (RBCategories.Checked == true)
             {
                 if (TBName2.Text.Length == 0)
@@ -101,13 +106,15 @@ namespace Lab.EF.UI
                 {
                     MessageBox.Show("El campo 'Descripción' está vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                else if (!categoriesLogic.CategoryExists(idCat))
+                {
+                    MessageBox.Show("La ID ya existe", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 else
                 {
-                    CategoriesLogic categoriesLogic = new CategoriesLogic();
-
                     categoriesLogic.Add(new Categories
                     {
-                        CategoryID = Convert.ToInt32(NUD_IDCat.Value),
+                        CategoryID = idCat,
                         CategoryName = TBName2.Text,
                         Description = TDescription.Text,
                     });
@@ -156,11 +163,16 @@ namespace Lab.EF.UI
 
         private void BDelete_Click(object sender, EventArgs e)
         {
+            int idCat = Convert.ToInt32(NUD_IDCat.Value);
+
+            CategoriesLogic categoriesLogic = new CategoriesLogic();
+
             if (RBCategories.Checked == true)
             {
-                CategoriesLogic categoriesLogic = new CategoriesLogic();
-
-                categoriesLogic.Delete(Convert.ToInt32(NUD_IDCat.Value));
+                if (categoriesLogic.CategoryExists(idCat))
+                    categoriesLogic.Delete(Convert.ToInt32(NUD_IDCat.Value));
+                else
+                    MessageBox.Show($"La id {idCat} no se encuentra", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else if (RBEmployees.Checked == true)
             {
