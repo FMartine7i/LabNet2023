@@ -39,5 +39,20 @@ namespace LINQ.Logic
 
             return product789;
         }
+
+        public IQueryable<Products> OrderByName()
+        {
+            var query = context.Products.OrderBy(p => p.ProductName);
+
+            return query;
+        }
+
+        public IQueryable<Products> OrderByUnit()
+        {
+            var query = (from p in context.Products
+                         select p).OrderByDescending(p => p.UnitsInStock);
+
+            return query;
+        }
     }
 }

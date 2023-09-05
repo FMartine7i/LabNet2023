@@ -15,6 +15,12 @@ namespace LINQ.UI
 
         private void BQuery_Click(object sender, EventArgs e)
         {
+            if (CBQueries.SelectedItem == null)
+            {
+                MessageBox.Show("Por favor, selecciona una opción antes de continuar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string selectedOption = CBQueries.SelectedItem.ToString();
 
             switch (selectedOption)
@@ -49,7 +55,7 @@ namespace LINQ.UI
                     }
                     break;
                 case "Productos con stock que cuestan más de 3":
-                    using(var productsLogic = new ProductsLogic(context))
+                    using (var productsLogic = new ProductsLogic(context))
                     {
                         var expensiveProducts = productsLogic.GetExpensiveProducts();
 
@@ -121,9 +127,75 @@ namespace LINQ.UI
                         MessageBox.Show(resultText.ToString(), "Nombre de los Clientes", MessageBoxButtons.OK);
                     }
                     break;
+                case "Primeros 3 customers de WA":
+                    using (var customersLogic = new CustomersLogic(context))
+                    {
+                        var customers = customersLogic.Get3FirstCustomers();
+
+                        StringBuilder resultText = new StringBuilder();
+
+                        foreach (var customer in customers)
+                        {
+                            resultText.AppendLine($"Customer ID: {customer.CustomerID}, Nombre: {customer.ContactName}");
+                        }
+
+                        MessageBox.Show(resultText.ToString(), "First 3 Customers", MessageBoxButtons.OK);
+                    }
+                    break;
+                case "Lista de productos ordenados por nombre":
+                    using (var productsLogic = new ProductsLogic(context))
+                    {
+                        var products = productsLogic.OrderByName();
+
+                        StringBuilder resultText = new StringBuilder();
+
+                        foreach (var product in products)
+                        {
+                            resultText.AppendLine($"Name: {product.ProductName}");
+                        }
+
+                        MessageBox.Show(resultText.ToString(), "Order by Name", MessageBoxButtons.OK);
+                    }
+                    break;
+                case "Productos ordenados por units in stock DESC":
+                    using (var productsLogic = new ProductsLogic(context))
+                    {
+                        var products = productsLogic.OrderByUnit();
+
+                        StringBuilder resultText = new StringBuilder();
+
+                        foreach (var product in products)
+                        {
+                            resultText.AppendLine($"Units in stock: {product.UnitsInStock} - Name: {product.ProductName}");
+                        }
+
+                        MessageBox.Show(resultText.ToString(), "Ordenado por unidades en stock", MessageBoxButtons.OK);
+                    }
+                    break;
+                case "Categorías asociadas a los productos":
+                    using (var categoriesLogic = new CategoriesLogic(context))
+                    {
+                        var categories = categoriesLogic.JoinProducts();
+
+                        StringBuilder resultText = new StringBuilder();
+
+                        foreach(var category in categories)
+                        {
+                            resultText.AppendLine($"Category ID: {category.CategoryID}, Category Name: {category.CategoryName}, Product Name: {category.Products} ");
+                        }
+
+                        MessageBox.Show(resultText.ToString(), "Categorías con productos");
+                    }
+                    break;
+                case "Primer elemento de Products":
+
+                    break;
+                case "Customers con cantidad de ordenes asociadas":
+
+                    break;
                 default:
                     MessageBox.Show("La opción ingresada no es válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;                
+                    break;
             }
         }
 

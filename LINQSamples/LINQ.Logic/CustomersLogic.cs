@@ -52,5 +52,13 @@ namespace LINQ.Logic
                                         };
             return CustomersWithOrders;
         }
+
+        public IQueryable<Customers> Get3FirstCustomers()
+        {
+            var query = (from c in context.Customers
+                         where c.Region == "WA"
+                         select c).Take(3);
+            return query;
+        }
     }
 }
