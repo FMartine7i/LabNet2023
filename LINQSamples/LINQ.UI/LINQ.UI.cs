@@ -179,19 +179,36 @@ namespace LINQ.UI
 
                         StringBuilder resultText = new StringBuilder();
 
-                        foreach(var category in categories)
+                        foreach (var category in categories)
                         {
-                            resultText.AppendLine($"Category ID: {category.CategoryID}, Category Name: {category.CategoryName}, Product Name: {category.Products} ");
+                            resultText.AppendLine($"Category ID: {category.CategoryID}, Category Name: {category.CategoryName} ");
                         }
 
                         MessageBox.Show(resultText.ToString(), "Categorías con productos");
                     }
                     break;
-                case "Primer elemento de Products":
+                case "Primer elemento de Productos":
+                    using (var productsLogic = new ProductsLogic(context))
+                    {
+                        var products = productsLogic.FirstElement();
 
+                        MessageBox.Show($"El primer elemento en Products es: {products.ProductName}");
+                    }
                     break;
                 case "Customers con cantidad de ordenes asociadas":
+                    using (var customersLogic = new CustomersLogic(context))
+                    {
+                        var customers = customersLogic.OrderCount();
 
+                        StringBuilder resultText = new StringBuilder();
+
+                        foreach (var customer in customers)
+                        {
+                            resultText.AppendLine($"Customer ID: {customer.CustomerName} - Order count: {customer.TotalOrders} - Last order date: {customer.LastOrderDate}");
+                        }
+
+                        MessageBox.Show(resultText.ToString(), "Order Count", MessageBoxButtons.OK);
+                    }
                     break;
                 default:
                     MessageBox.Show("La opción ingresada no es válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

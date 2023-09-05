@@ -54,5 +54,12 @@ namespace LINQ.Logic
 
             return query;
         }
+
+        public Products FirstElement()
+        {
+            var firstElement = context.Products.First();
+
+            return firstElement;
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Linq.Data;
 using Linq.Entities;
+using System.ComponentModel;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
 namespace LINQ.Logic
@@ -14,13 +16,14 @@ namespace LINQ.Logic
 
         public IQueryable<Categories> JoinProducts()
         {
-            var query = context.Categories.GroupJoin(context.Products,
-                                                    category => category.CategoryID,
-                                                    product => product.CategoryID,
-                                                    (category, products) => new { Category = category, Products = products})
-                                                    .SelectMany(group => group.Products.DefaultIfEmpty(),
-                                                    (group, product) => new { Category = group.Category, Product = product})
-                                                    .Select(group => group.Category).Distinct();
+            var categoryIDs = (from category in context.Categories
+                         join product in context.Products
+                         on category.CategoryID equals product.CategoryID
+                         select category.CategoryID).Distinct();
+
+            var query = (from category in context.Categories
+                         where categoryIDs.Contains(category.CategoryID)
+                         select category);
             return query;
         }
     }

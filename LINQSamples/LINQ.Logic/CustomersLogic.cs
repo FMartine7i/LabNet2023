@@ -60,5 +60,28 @@ namespace LINQ.Logic
                          select c).Take(3);
             return query;
         }
+        
+        public IQueryable<CustomerOrderSummary> OrderCount()
+        {
+            var query = context.Customers
+                .Join(context.Orders,
+                      customer => customer.CustomerID,
+                      orders => orders.CustomerID,
+                      (customer, orders) => new
+                      {
+                          CustomerName = customer.ContactName,
+                          OrderID = orders.OrderID,
+                          OrderDate = orders.OrderDate
+                      })
+                .GroupBy(result => result.CustomerName)
+                .Select(group => new CustomerOrderSummary
+                {
+                    CustomerName = group.Key,
+                    TotalOrders = group.Count(),
+                    LastOrderDate = group.Max(result => result.OrderDate)
+                });
+
+            return query;
+        }
     }
 }
