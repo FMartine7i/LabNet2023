@@ -92,7 +92,7 @@ namespace LINQ.UI
                 case "Nombre de los customers":
                     using (var customersLogic = new CustomersLogic(context))
                     {
-                        var customersName = customersLogic.CustomersNames();
+                        var customersName = customersLogic.CustomerNames();
 
                         StringBuilder resultText = new StringBuilder();
 
@@ -106,7 +106,20 @@ namespace LINQ.UI
                     }
                     break;
                 case "Join entre customers (WA) y Orders":
+                    using (var customersLogic = new CustomersLogic(context))
+                    {
+                        var customersName = customersLogic.CustomersWithOrders();
 
+                        StringBuilder resultText = new StringBuilder();
+
+                        foreach (var customer in customersName)
+                        {
+
+                            resultText.AppendLine($"Nombre: {customer.CustomerName} - Región: WA - Fecha de orden: {customer.OrderDate}");
+                        }
+
+                        MessageBox.Show(resultText.ToString(), "Nombre de los Clientes", MessageBoxButtons.OK);
+                    }
                     break;
                 default:
                     MessageBox.Show("La opción ingresada no es válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -3,6 +3,6 @@
     public class CustomersWA
     {
         public string CustomerName { get; set; } 
-        public string OrderDate { get; set; }
+        public System.DateTime? OrderDate { get; set; }
     }
 }

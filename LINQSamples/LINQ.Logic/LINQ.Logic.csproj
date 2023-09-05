@@ -50,8 +50,8 @@
   <ItemGroup>
     <Compile Include="BaseLogic.cs" />
     <Compile Include="CategoriesLogic.cs" />
-    <Compile Include="Clases\CustomersNames.cs" />
-    <Compile Include="Clases\CustomersWA.cs" />
+    <Compile Include="DTO\CustomersNames.cs" />
+    <Compile Include="DTO\CustomersWA.cs" />
     <Compile Include="CustomersLogic.cs" />
     <Compile Include="ProductsLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

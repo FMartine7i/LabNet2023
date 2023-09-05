@@ -29,10 +29,10 @@ namespace LINQ.Logic
             return customersInWA;
         }
 
-        public IQueryable<CustomersNames> CustomersNames()
+        public IQueryable<CustomersNames> CustomerNames()
         {
             var customerNames = from c in context.Customers
-                                select new
+                                select new CustomersNames()
                                 {
                                     UpperCaseName = c.ContactName.ToUpper(),
                                     LowerCaseName = c.ContactName.ToLower()
@@ -40,12 +40,12 @@ namespace LINQ.Logic
             return customerNames;
         }
 
-        public List<Customers> CustomersWithOrders()
+        public IQueryable<CustomersWA> CustomersWithOrders()
         {
             var CustomersWithOrders = from c in context.Customers
                                         join o in context.Orders on c.CustomerID equals o.CustomerID
                                         where c.Region == "WA" && o.OrderDate > new DateTime(1997, 1, 1)
-                                        select new
+                                        select new CustomersWA()
                                         {
                                             CustomerName = c.ContactName,
                                             OrderDate = o.OrderDate
