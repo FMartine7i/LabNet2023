@@ -2,7 +2,6 @@
 using Linq.Entities;
 using LINQ.Logic.Clases;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 

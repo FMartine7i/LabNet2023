@@ -11,10 +11,6 @@ namespace LINQ.Logic
         {
          
         }
-        /*public IQueryable<Products> GetProductsOutOfStock()
-        {
-            return context.Products.Where(p => p.UnitsInStock == 0);
-        }*/
 
         public IQueryable<Products> GetProductsOutOfStock()
         {
