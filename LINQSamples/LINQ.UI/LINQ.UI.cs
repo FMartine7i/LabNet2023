@@ -6,7 +6,7 @@ namespace LINQ.UI
 {
     public partial class Form1 : Form
     {
-        private readonly NorthwindContext context;
+        protected readonly NorthwindContext context;
         public Form1()
         {
             InitializeComponent();
