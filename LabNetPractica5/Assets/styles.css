@@ -37,13 +37,35 @@ header{
 
 main{
     min-height: 70vh;
-    display: grid;
     font-size: 140%;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 article{
     width: 100%;
+    text-align: center;
+}
+
+.box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.num{ 
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color:rgb(175, 70, 245);
+    background-color: #2e2135;
+    border-radius: 20px;
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
 }
 
 p{

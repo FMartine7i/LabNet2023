@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const highscoreDisplay = document.getElementById("highscore");
     const footer = document.getElementById("miFooter");
     const resetButton = document.getElementById("reset");
+    const showNum = document.querySelector(".number")
     const originalFooterColor = footer.style.background;
 
     function resetGame() {
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("score").textContent = "Score: ";
         document.getElementById("entrada").value = "";
         document.getElementById("message").textContent = "";
+        showNum.textContent = "?";
         input.disabled = false;
         submit.disabled = false;
         footer.style.background = originalFooterColor;
@@ -43,7 +45,8 @@ document.addEventListener("DOMContentLoaded", function() {
             if (guess == random){
                 message.textContent = "¡Felicidades! Has encontrado el número!";
                 message.style.color = "#0ee6ba";
-    
+                
+                showNum.textContent = random;
                 footer.style.background = "linear-gradient(to bottom right, rgba(32, 245, 131, 0), rgba(16, 230, 135, 0.5), #05edb7)";
                 input.disabled = true;
                 submit.disabled = true;
@@ -54,13 +57,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
             else if (guess < random){
-                message.textContent = "El número es mayor. Inténtalo de nuevo.";
+                message.textContent = "Muy bajo!";
                 message.style.color = "#e8317d";
     
                 footer.style.background = "linear-gradient(to bottom right, #ee20f5, #f52083, #f52055)";
             }
             else {
-                message.textContent = "El número es menor. Inténtalo de nuevo.";
+                message.textContent = "Muy alto!";
                 message.style.color = "#e8317d";
     
                 footer.style.background = "linear-gradient(to bottom right, #ee20f5, #f52083, #f52055)";
