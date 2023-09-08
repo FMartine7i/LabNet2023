@@ -137,10 +137,12 @@ input{
     font-size: 150%;
     background-image: linear-gradient(45deg, #35deeb, #8919e6, #a549f0);
     background-clip: text;
+    -webkit-background-clip: text;
     background-size: 200% 200%;
     color:transparent;
     animation: color 5s ease-in-out infinite;
 }
+
 
 .prevMessage{
     margin-top: 10px;
@@ -160,16 +162,11 @@ input{
 }
 
 .underline{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-hr{
-    color: #39243f;
-    height: 1px;
+    margin: 2%;
     width: 95%;
-    margin: 10px;
+    height: 1px;
+    color: #39243f;
+    border: 1px solid #39243f ;
 }
 
 .prev{
