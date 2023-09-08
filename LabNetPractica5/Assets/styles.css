@@ -87,7 +87,7 @@ input{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5vh;
+    margin-top: 4vh;
     margin-bottom: 5vh;
 }
 
@@ -110,7 +110,8 @@ input{
 
 
 #entrada{
-    width: 15%;
+    width: 8vw;
+    height: 4.5vh;
     background: #2e2135;
     border-style: solid;
     border-width: 1px;
@@ -122,13 +123,17 @@ input{
 #guesssubmit, #reset{
     background: #950fe2;
     border-style: none;
-    margin: 10px 0 0 0;
+    margin: 10px 0 0;
     color: #ffffff;
-    width: 8%;
+    height: 4.5vh;
+}
+
+#reset{
+    width: 10vw;
 }
 
 #guesssubmit{
-    width: 4.5vw;
+    width: 7vw;
 }
 
 
