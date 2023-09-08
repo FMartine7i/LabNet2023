@@ -2,10 +2,12 @@ let random = genRandom();
 
 let score = 10;
 let highscore = 0;
+let prevGuesses = [];
 
 function genRandom() {
     return Math.floor(Math.random() * 20) + 1;
 }
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const input = document.getElementById("entrada");
@@ -16,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const footer = document.getElementById("miFooter");
     const resetButton = document.getElementById("reset");
     const showNum = document.querySelector(".number")
+    const prevGuessesMessage = document.getElementById("previousGuesses");
     const originalFooterColor = footer.style.background;
 
     function resetGame() {
@@ -28,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
         showNum.textContent = "?";
         input.disabled = false;
         submit.disabled = false;
+        prevGuessesMessage.textContent = "";
         footer.style.background = originalFooterColor;
     }
 
@@ -36,14 +40,20 @@ document.addEventListener("DOMContentLoaded", function() {
         const guess = parseInt(input.value);
     
         if (isNaN(guess)){
-            message.textContent = "Ingresa un número entero";
+            alert("Ingresa un número entero");
         }
-        else if (guess < 0 || guess > 20){
-            message.textContent = "Por favor, ingresa un número entre 0 y 20";
+        else if(guess > 20){
+            message.textContent = "Ingresa un número menor a 20";
+        }
+        else if (guess < 0){
+            message.textContent = "Ingresa un número mayor a 0";
         }
         else{
+            prevGuesses.push(guess);
+            prevGuessesMessage.innerHTML += `${guess} `;
+
             if (guess == random){
-                message.textContent = "¡Felicidades! Has encontrado el número!";
+                message.textContent = "Has encontrado el número!";
                 message.style.color = "#0ee6ba";
                 
                 showNum.textContent = random;

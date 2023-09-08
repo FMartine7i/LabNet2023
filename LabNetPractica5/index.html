@@ -17,21 +17,29 @@
             <div class="box">
                 <div class="num">
                     <span class="number">?</span>
-                </div>
+                </div>               
             </div>
-                <div id="form">
-                    <p>Ingresa un numero:</p>
-                    <form action = "" class = "form1">
-                        <input type="text" id = "entrada">
-                        <input type="submit" value="Adivinar" id="guesssubmit">
-                    </form>
-                </div>
+            
+            <p id="message" class="gradient-color"></p>
+                <div class="flex-div">
+                    <div id="form">
+                        <p>Ingresa un numero:</p>
+                        <form action = "" class = "form1">
+                            <input type="text" id = "entrada">
+                            <input type="submit" value="Adivinar" id="guesssubmit">
+                        </form>
+                    </div>
 
-                <div class="info">
-                    <p id="message" class="gradient-color"></p>
-                    <p id="score">Score:</p>
-                    <p id="highscore">Highscore:</p>
+                    <div class="info">
+                        
+                        <p id="score">Score:</p>
+                        <p id="highscore">Highscore:</p>
+                    </div>                   
                 </div>
+                    <div class ="underline">
+                    <hr>
+                    </div>
+                    <p class = "prevMessage">Ya usado: <span id="previousGuesses"></span></p>        
 
                 <div class="reload">
                     <form action="" class="form2">
@@ -42,7 +50,7 @@
     </main>
 
     <footer id="miFooter">
-        <p> p</p>
+
     </footer>
 </body>
 </html>

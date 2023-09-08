@@ -47,6 +47,7 @@ main{
 article{
     width: 100%;
     text-align: center;
+    margin-bottom: 30px;
 }
 
 .box{
@@ -82,14 +83,40 @@ input{
     margin: 10px;
 }
 
+.flex-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
+#form{
+    margin-left: 12%;
+    width: 50vw;
+}
+
+
+.info{
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+}
+
+#highscore, #score{
+    margin-left: 6%;
+}
+
+
 #entrada{
-    width: 7%;
+    width: 15%;
     background: #2e2135;
     border-style: solid;
     border-width: 1px;
     color:#be8af0;
     border-color: #be8af0;
-    margin: 10px 0 10px 10px;
+    margin: 10px;
 }
 
 #guesssubmit, #reset{
@@ -104,9 +131,6 @@ input{
     width: 4.5vw;
 }
 
-.info{
-    margin: 20px 0 20px 0;
-}
 
 #message{
     font-weight: bolder;
@@ -115,7 +139,12 @@ input{
     background-clip: text;
     background-size: 200% 200%;
     color:transparent;
-    animation: color 12s ease-in-out infinite;
+    animation: color 5s ease-in-out infinite;
+}
+
+.prevMessage{
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 @keyframes color{
@@ -128,6 +157,23 @@ input{
     100%{
         background-position: 0 50%;
     }
+}
+
+.underline{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+hr{
+    color: #39243f;
+    height: 1px;
+    width: 95%;
+    margin: 10px;
+}
+
+.prev{
+    position: absolute;
 }
 
 #miFooter{
