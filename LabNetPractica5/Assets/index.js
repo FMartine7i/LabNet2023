@@ -33,25 +33,29 @@ function resetGame() {
     footer.style.background = originalFooterColor;
 }
   
+function isValid(input, message){
+    if(isNaN(input)){
+        alert("Ingresa un número entero");
+    }
+    else if(input > 20){
+        message.textContent = "Ingresa un número menor a 20";
+    }
+    else if (input <= 0){
+        message.textContent = "Ingresa un número mayor a 0";
+    }
+    else{
+        return true;
+    }
+}
+
 
 submit.addEventListener("click", function(e){
     e.preventDefault();
     const guess = parseInt(input.value);
 
-    if (isNaN(guess)){
-        alert("Ingresa un número entero");
-    }
-    else if(guess > 20){
-        message.textContent = "Ingresa un número menor a 20";
-    }
-    else if (guess < 0){
-        message.textContent = "Ingresa un número mayor a 0";
-    }
-    else{
-        prevGuesses.push(guess);
-        prevGuessesMessage.innerHTML += `${guess} `;
+    if(isValid(guess, message)){
 
-        if (guess == random){
+        if(guess == random){
             message.textContent = "Has encontrado el número!";
             message.style.color = "#0ee6ba";
             
@@ -62,34 +66,42 @@ submit.addEventListener("click", function(e){
 
             if (score > highscore) {
                 highscore = score;
-                highscoreDisplay.textContent = "Highscore: " + highscore;
+                highscoreDisplay.textContent = `Highscore: ${highscore}`;
             }
         }
-        else if (guess < random){
-            message.textContent = "Muy bajo!";
-            message.style.color = "#e8317d";
+        else{
+            prevGuesses.push(guess);
+            prevGuessesMessage.innerHTML += `${guess} `;
+        
+            if(guess < random){
+                message.textContent = "Muy bajo!";
+                message.style.color = "#e8317d";
 
-            footer.style.background = "linear-gradient(to bottom right, #ee20f5, #f52083, #f52055)";
+                footer.style.background = "linear-gradient(to bottom right, #ee20f5, #f52083, #f52055)";
+            }
+            else{
+                message.textContent = "Muy alto!";
+                message.style.color = "#e8317d";
+
+                footer.style.background = "linear-gradient(to bottom right, #ee20f5, #f52083, #f52055)";
+            }
+
+            score--;
+            scoreDisplay.textContent = `Score: ${score}`;
+
+            if(score == 0){
+                message.textContent = `Perdiste. El número era: ${random}`;
+                message.style.color = "#e8317d";
+                submit.disabled = true;
+                resetButton.disabled = false;      
+            }
         }
-        else {
-            message.textContent = "Muy alto!";
-            message.style.color = "#e8317d";
 
-            footer.style.background = "linear-gradient(to bottom right, #ee20f5, #f52083, #f52055)";
-        }
-
-        score--;
-        scoreDisplay.textContent = 'Score: ' + score;
-
-        if (score == 0){
-            message.textContent = "Perdiste. El número era: " + random;
-            message.style.color = "#e8317d";
-            submit.disabled = true;
-            resetButton.disabled = false;      
-        }
+        input.value = "";
     }
-
-    input.value = "";
+    else{
+        input.value = "";
+    }
 });
 
 resetButton.addEventListener("click", function(e) {
