@@ -1,7 +1,5 @@
 ﻿using Linq.Data;
-using Linq.Entities;
 using LINQ.Logic.Clases;
-using System;
 using System.Linq;
 
 namespace LINQ.Logic

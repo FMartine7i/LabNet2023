@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LINQ.Logic.Clases
+﻿namespace LINQ.Logic.Clases
 {
     public class CustomersInfo
     {
