@@ -13,17 +13,28 @@ namespace LINQ.Logic
         {
         }
 
-        public IQueryable<Customers> GetCustomers()
+        public IQueryable<CustomersInfo> GetCustomers()
         {
             var customers = from c in context.Customers
-                            select c;
+                            select new CustomersInfo
+                            {
+                                CustomerID = c.CustomerID,
+                                CustomerName = c.ContactName
+                            };
 
             return customers;
         }
 
-        public IQueryable<Customers> CustomersFromWA()
+        public IQueryable<CustomersInfo> CustomersFromWA()
         {
-            var customersInWA = context.Customers.Where(c => c.Region == "WA");
+            var customersInWA = context.Customers
+                                .Where(c => c.Region == "WA")
+                                .Select(c => new CustomersInfo
+                                {
+                                    CustomerID = c.CustomerID,
+                                    CustomerName = c.ContactName,
+                                    Region = c.Region
+                                });
 
             return customersInWA;
         }
@@ -39,12 +50,12 @@ namespace LINQ.Logic
             return customerNames;
         }
 
-        public IQueryable<CustomersWA> CustomersWithOrders()
+        public IQueryable<CustomersInfo> CustomersWithOrders()
         {
             var CustomersWithOrders = from c in context.Customers
                                         join o in context.Orders on c.CustomerID equals o.CustomerID
                                         where c.Region == "WA" && o.OrderDate > new DateTime(1997, 1, 1)
-                                        select new CustomersWA()
+                                        select new CustomersInfo()
                                         {
                                             CustomerName = c.ContactName,
                                             OrderDate = o.OrderDate
@@ -52,11 +63,16 @@ namespace LINQ.Logic
             return CustomersWithOrders;
         }
 
-        public IQueryable<Customers> Get3FirstCustomers()
+        public IQueryable<CustomersInfo> Get3FirstCustomers()
         {
             var query = (from c in context.Customers
                          where c.Region == "WA"
-                         select c).Take(3);
+                         select new CustomersInfo
+                         {
+                             CustomerID = c.CustomerID,
+                             CustomerName = c.ContactName,
+                         }).Take(3);
+
             return query;
         }
         

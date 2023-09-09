@@ -11,7 +11,6 @@ namespace LINQ.Logic
         {
             context = dbContext;
         }
-
         public void Dispose()
         {
             context.Dispose();

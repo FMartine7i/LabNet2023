@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LINQ.UI
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, IDisposable
     {
         protected readonly NorthwindContext context;
         public Form1()
@@ -36,7 +36,7 @@ namespace LINQ.UI
 
                             foreach (var customer in customers)
                             {
-                                resultText.AppendLine($"Customer ID: {customer.CustomerID}, Nombre: {customer.ContactName}");
+                                resultText.AppendLine($"Customer ID: {customer.CustomerID}, Nombre: {customer.CustomerName}");
                             }
 
                             MessageBox.Show(resultText.ToString(), "Customers", MessageBoxButtons.OK);
@@ -51,12 +51,12 @@ namespace LINQ.UI
 
                             foreach (var product in productsOutStock)
                             {
-                                resultText.AppendLine($"Producto ID: {product.ProductID}, Nombre: {product.ProductName}");
+                                resultText.AppendLine($"Producto ID: {product.ProductID} - Nombre: {product.ProductName}");
                             }
                             MessageBox.Show(resultText.ToString(), "Products out of stock", MessageBoxButtons.OK);
                         }
                         break;
-                    case "Productos con stock que cuestan más de 3":
+                    case "Productos con stock - Precio > 3":
                         using (var productsLogic = new ProductsLogic(context))
                         {
                             var expensiveProducts = productsLogic.GetExpensiveProducts();
@@ -65,7 +65,7 @@ namespace LINQ.UI
 
                             foreach (var product in expensiveProducts)
                             {
-                                resultText.AppendLine($"Producto ID: {product.ProductID}, Nombre: {product.ProductName}");
+                                resultText.AppendLine($"Producto ID: {product.ProductID}, Nombre: {product.ProductName} - Precio: {product.UnitPrice}");
                             }
                             MessageBox.Show(resultText.ToString(), "Expensive Products", MessageBoxButtons.OK);
                         }
@@ -79,21 +79,20 @@ namespace LINQ.UI
 
                             foreach (var customer in customers)
                             {
-                                resultText.AppendLine($"Customer ID: {customer.CustomerID}, Nombre: {customer.ContactName}, Region: {customer.Region}");
+                                resultText.AppendLine($"Customer ID: {customer.CustomerID} - Nombre: {customer.CustomerName} - Region: {customer.Region}");
                             }
 
                             MessageBox.Show(resultText.ToString(), "Customers from Region WA", MessageBoxButtons.OK);
                         }
                         break;
-                    case "Primer elemento o nulo de productos con ID = 789":
+                    case "Producto ID = 789":
                         using (var productsLogic = new ProductsLogic(context))
                         {
                             var product789 = productsLogic.ProductID789();
 
                             if (product789 != null)
-                                MessageBox.Show($"Producto ID: {product789.ProductID}, Nombre: {product789.ProductName}", "Product ID = 789", MessageBoxButtons.OK);
+                                MessageBox.Show($"Producto ID: {product789.ProductID} - Nombre: {product789.ProductName} - Precio: {product789.UnitPrice}", "Product ID = 789", MessageBoxButtons.OK);
                             else
-
                                 MessageBox.Show("No se encontró ningún producto con ID 789", "Product ID = 789", MessageBoxButtons.OK);
                         }
                         break;
@@ -138,13 +137,13 @@ namespace LINQ.UI
 
                             foreach (var customer in customers)
                             {
-                                resultText.AppendLine($"Customer ID: {customer.CustomerID}, Nombre: {customer.ContactName}");
+                                resultText.AppendLine($"Customer ID: {customer.CustomerID}, Nombre: {customer.CustomerName}");
                             }
 
                             MessageBox.Show(resultText.ToString(), "First 3 Customers", MessageBoxButtons.OK);
                         }
                         break;
-                    case "Lista de productos ordenados por nombre":
+                    case "Productos ordenados por nombre":
                         using (var productsLogic = new ProductsLogic(context))
                         {
                             var products = productsLogic.OrderByName();
@@ -153,13 +152,13 @@ namespace LINQ.UI
 
                             foreach (var product in products)
                             {
-                                resultText.AppendLine($"Name: {product.ProductName}");
+                                resultText.AppendLine($"ID: {product.ProductID} - Name: {product.ProductName}");
                             }
 
                             MessageBox.Show(resultText.ToString(), "Order by Name", MessageBoxButtons.OK);
                         }
                         break;
-                    case "Productos ordenados por units in stock DESC":
+                    case "Productos ordenados por unidades en stock":
                         using (var productsLogic = new ProductsLogic(context))
                         {
                             var products = productsLogic.OrderByUnit();
@@ -174,7 +173,7 @@ namespace LINQ.UI
                             MessageBox.Show(resultText.ToString(), "Ordenado por unidades en stock", MessageBoxButtons.OK);
                         }
                         break;
-                    case "Categorías asociadas a los productos":
+                    case "Categorías de los productos":
                         using (var categoriesLogic = new CategoriesLogic(context))
                         {
                             var categories = categoriesLogic.JoinProducts();
@@ -194,10 +193,10 @@ namespace LINQ.UI
                         {
                             var products = productsLogic.FirstElement();
 
-                            MessageBox.Show($"El primer elemento en Products es: {products.ProductName}");
+                            MessageBox.Show($"ID: {products.ProductID} - Name: {products.ProductName} - Price: {products.UnitPrice}");
                         }
                         break;
-                    case "Customers con cantidad de ordenes asociadas":
+                    case "Ordenes de customers":
                         using (var customersLogic = new CustomersLogic(context))
                         {
                             var customers = customersLogic.OrderCount();

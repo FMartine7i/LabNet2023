@@ -43,7 +43,7 @@
             CBQueries.FlatStyle = FlatStyle.Flat;
             CBQueries.ForeColor = Color.FromArgb(190, 150, 250);
             CBQueries.FormattingEnabled = true;
-            CBQueries.Items.AddRange(new object[] { "Customers", "Productos sin stock", "Productos con stock que cuestan más de 3", "Customers de la región WA", "Primer elemento o nulo de productos con ID = 789", "Nombre de los customers", "Join entre customers (WA) y Orders", "Primeros 3 customers de WA", "Lista de productos ordenados por nombre", "Productos ordenados por units in stock DESC", "Categorías asociadas a los productos", "Primer elemento de Productos", "Customers con cantidad de ordenes asociadas" });
+            CBQueries.Items.AddRange(new object[] { "Customers", "Productos sin stock", "Productos con stock - Precio > 3", "Customers de la región WA", "Producto ID = 789", "Nombre de los customers", "Join entre customers (WA) y Orders", "Primeros 3 customers de WA", "Productos ordenados por nombre", "Productos ordenados por unidades en stock", "Categorías de los productos", "Primer elemento de Productos", "Ordenes de customers" });
             CBQueries.Location = new Point(144, 86);
             CBQueries.Margin = new Padding(4);
             CBQueries.Name = "CBQueries";

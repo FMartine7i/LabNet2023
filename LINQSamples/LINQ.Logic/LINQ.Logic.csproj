@@ -53,9 +53,10 @@
   <ItemGroup>
     <Compile Include="BaseLogic.cs" />
     <Compile Include="CategoriesLogic.cs" />
-    <Compile Include="DTO\CustomersNames.cs" />
-    <Compile Include="DTO\CustomersWA.cs" />
+    <Compile Include="DTOs\CustomersInfo.cs" />
+    <Compile Include="DTOs\CustomersNames.cs" />
     <Compile Include="CustomersLogic.cs" />
+    <Compile Include="DTOs\ProductsDTO.cs" />
     <Compile Include="ProductsLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
