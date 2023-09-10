@@ -1,0 +1,27 @@
+﻿@model Lab.MVC.Models.CategoriesView
+
+@{
+    ViewBag.Title = "Update";
+}
+
+<body class="modal-body">
+    <h2>Editar Categoría</h2>
+    @using (Html.BeginForm("Update", "Categories", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.HiddenFor(model => model.Id)
+            @Html.LabelFor(model => model.Name)
+            @Html.LabelFor(model => model.Name, new
+            {
+                @class = "form-control"
+            })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description)
+            @Html.TextBoxFor(model => model.Description, new { @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-rounded" style="margin: 1rem 0 2rem 0">Save</button>
+    }
+</body>

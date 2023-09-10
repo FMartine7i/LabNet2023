@@ -1,0 +1,21 @@
+﻿@model Lab.MVC.Models.CategoriesView
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    @using (Html.BeginForm("Insert", "Categories", FormMethod.Post))
+            {
+                <label>Name: </label> @Html.TextBoxFor(r => r.Name)
+                <input type="submit" class="btn btn-primary btn-md btn-rounded" value="Guardar" />
+            }
+</body>
+</html>

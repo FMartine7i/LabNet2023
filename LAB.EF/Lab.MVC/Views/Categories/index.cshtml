@@ -1,0 +1,51 @@
+﻿@model List<Lab.MVC.Models.CategoriesView>
+
+@{
+    ViewBag.Title = "Categories Page";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div style="display: flex; justify-content: flex-end">
+        <div class="btn btn-outline-dark btn-rounded" style="margin: 10px">
+            @Html.ActionLink("New Category", "Insert")
+        </div>
+    </div>
+
+    <table class="table table-hover table-dark" style="margin-bottom: 3rem;">
+        <thead>
+            <tr>
+                <th scope="col">Category ID</th>
+                <th scope="col">Category name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <th scope="row">@category.Id</th>
+                    <td>@category.Name</td>
+                    <td>@category.Description</td>
+                    <td>
+                        <p class="btn btn-outline-info btn-rounded">
+                            @Html.ActionLink("Update", "Update", new { id = category.Id })
+                        </p>
+
+                        <p class="btn btn-outline-danger btn-rounded">
+                            @Html.ActionLink("Delete", "Delete", new { id = category.Id }, new { onclick = "return confirm('Confirme si desea borrar')" })
+                        </p>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
