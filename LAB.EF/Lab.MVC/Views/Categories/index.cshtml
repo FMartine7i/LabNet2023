@@ -14,7 +14,7 @@
 <body>
     <div style="display: flex; justify-content: flex-end">
         <div class="btn btn-outline-dark btn-rounded" style="margin: 10px">
-            @Html.ActionLink("New Category", "Insert")
+            @Html.ActionLink("New Category", "Insert", new { @style = "color: #00ff80; text-decoration: none;" })
         </div>
     </div>
 
@@ -31,17 +31,19 @@
             @foreach (var category in Model)
             {
                 <tr>
-                    <th scope="row">@category.Id</th>
-                    <td>@category.Name</td>
-                    <td>@category.Description</td>
+                    <th scope="row" style="vertical-align: middle">@category.Id</th>
+                    <td style="vertical-align: middle">@category.Name</td>
+                    <td style="vertical-align: middle">@category.Description</td>
                     <td>
-                        <p class="btn btn-outline-info btn-rounded">
-                            @Html.ActionLink("Update", "Update", new { id = category.Id })
-                        </p>
-
-                        <p class="btn btn-outline-danger btn-rounded">
-                            @Html.ActionLink("Delete", "Delete", new { id = category.Id }, new { onclick = "return confirm('Confirme si desea borrar')" })
-                        </p>
+                        <div style="margin: 5px 0 5px 0">
+                            <span class="btn btn-outline-info btn-rounded">
+                                @Html.ActionLink("Update", "Update", new { id = category.Id })
+                            </span>
+                            <span style="margin: 0 10px 0 10px">or</span>
+                            <span class="btn btn-outline-danger btn-rounded">
+                                @Html.ActionLink("Delete", "Delete", new { id = category.Id }, new { onclick = "return confirm('¿Desea borrar la categoria?')" })
+                            </span>
+                        </div>
                     </td>
                 </tr>
             }

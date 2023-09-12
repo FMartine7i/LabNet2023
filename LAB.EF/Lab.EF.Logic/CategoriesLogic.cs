@@ -36,9 +36,12 @@ namespace Lab.EF.Logic
         {
             var categoryUpdate = context.Categories.Find(categories.CategoryID);
 
-            categoryUpdate.Description = categories.Description;
-
-            context.SaveChanges();
+            if (categoryUpdate != null)
+            {
+                categoryUpdate.CategoryName = categories.CategoryName;
+                categoryUpdate.Description = categories.Description;
+                context.SaveChanges();
+            }            
         }
 
         public bool CategoryExists(int categoryID)      // Este método busca dentro de la BD la ID buscada, en este caso, para 'categories'. Luego sirve para que la lógica del test avise si encontró una ID igual o se puede ingresar correctamente la nueva categoría

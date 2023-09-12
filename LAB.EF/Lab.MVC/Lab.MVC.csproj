@@ -222,6 +222,10 @@
     <Content Include="Scripts\jquery-3.7.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lab.EF.Data\Lab.EF.Data.csproj">
+      <Project>{827069F1-1D32-4B4C-B548-3C52FFBE57C4}</Project>
+      <Name>Lab.EF.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lab.EF.Entities\Lab.EF.Entities.csproj">
       <Project>{5fa1cc43-97a3-4735-9aed-3b2b3f2338f3}</Project>
       <Name>Lab.EF.Entities</Name>
