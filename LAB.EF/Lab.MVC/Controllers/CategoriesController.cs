@@ -13,13 +13,13 @@ namespace Lab.MVC.Controllers
     public class CategoriesController : Controller
     {
         protected readonly NorthwindContext context;
+
         public CategoriesController()
         {
             context = new NorthwindContext();
         }
         CategoriesLogic logic = new CategoriesLogic(); 
 
-        // GET: Categories
         public ActionResult Index()
         {
             List<Categories> categorias = logic.GetAll();
