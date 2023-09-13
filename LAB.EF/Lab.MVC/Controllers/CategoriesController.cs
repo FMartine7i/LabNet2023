@@ -51,12 +51,29 @@ namespace Lab.MVC.Controllers
                     Description = categoriesView.Description,
                 };
 
-                logic.Add(categoriesEntity);
-
-                return RedirectToAction("Index");
+                if (categoriesView.Name == null)
+                {
+                    throw new ArgumentNullException("Name", "El campo de nombre no puede estar nulo.");
+                }
+                else if (categoriesView.Description == null)
+                {
+                    throw new ArgumentNullException("Description", "El campo de descripción no puede estar nulo.");
+                }
+                else
+                {
+                    logic.Add(categoriesEntity);
+                    return RedirectToAction("Index");
+                }
             }
-            catch (Exception)
+            catch (ArgumentNullException ex)
             {
+                ViewBag.ErrorMessage = ex.Message; // Configura el mensaje de error
+                return RedirectToAction("Index", "Error");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "Hubo un error.";
+                ViewBag.ExceptionMessage = ex.Message; // Configura el mensaje de excepción
                 return RedirectToAction("Index", "Error");
             }
         }
@@ -110,7 +127,7 @@ namespace Lab.MVC.Controllers
             {
                 Console.WriteLine($"Excepción de la base de datos: {ex.Message}");
                 return RedirectToAction("Index", "Error");
-            }
+            }          
         }
     }
 }

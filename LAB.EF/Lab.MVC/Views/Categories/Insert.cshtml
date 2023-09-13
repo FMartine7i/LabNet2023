@@ -12,15 +12,37 @@
     <title></title>
 </head>
 <body>
-    @using (Html.BeginForm("Insert", "Categories", FormMethod.Post))
+    @using (Html.BeginForm("Insert", "Categories", FormMethod.Post, new { id = "insert_form" }))
     {
         <div class="form-group">
-            <label>Name: </label> @Html.TextBoxFor(r => r.Name, new { @class = "form-control" })
+            @Html.LabelFor(model => model.Name)
+            @Html.TextBoxFor(r => r.Name, new { @class = "form-control", id = "name" })
         </div>
         <div class="form-group">
-            <label>Description: </label> @Html.TextBoxFor(r => r.Description, new { @class = "form-control" })
+            @Html.LabelFor(model => model.Description)
+            @Html.TextBoxFor(r => r.Description, new { @class = "form-control", id = "description" })
         </div>
         <input type="submit" style="margin: 1rem 0 2rem 0" class="btn btn-primary btn-md btn-rounded" value="Save" />
     }
+
+    <script>
+        document.getElementById("insert_form").addEventListener("submit", function (event) {
+            var name_field = document.getElementById("name");
+            var desc_field = document.getElementById("description");
+
+            if (name_field.value.trim() === "") {
+                alert("Por favor, ingrese un nombre.");
+            }
+            else if (desc_field.value.trim() == "") {
+                alert("Por favor, ingrese una descripción.");
+            }
+            else if (name_field.value.length < 3) {
+                alert("Por favor, ingrese un nombre con más de 3 caracteres.");
+            }
+            else if (desc_field.value.length < 5) {
+                alert("Por favor, ingrese una descripción con más de 5 caracteres.");
+            }
+        })
+    </script>
 </body>
 </html>
