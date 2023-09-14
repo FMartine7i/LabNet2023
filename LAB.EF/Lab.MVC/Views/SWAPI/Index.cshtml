@@ -12,12 +12,12 @@
     <title></title>
 </head>
 <body>
-    @using (Html.BeginForm("GetPlanet", "Planets", FormMethod.Get))
+    @using (Html.BeginForm("ShowPlanet", "Planet", FormMethod.Get))
     {
         <label for="id">ID:</label>
         <input type="text" name="id" id="id">
         <input type="submit" value="Get data">
-    }
+    
 
     <section>
         <h2>Planets</h2>
@@ -30,6 +30,8 @@
             <li>Population: @Model.Planet.Population</li>
         </ul>
     </section>
+    }
+
     <section>
         <h2>People</h2>
         <ul>

@@ -16,7 +16,7 @@ namespace Lab.MVC.Controllers
 
         public ActionResult ShowPlanet(int id)
         {
-            return RedirectToAction("GetPlanet", "Planets", new { id = id});
+            return RedirectToAction("GetPlanet", "Planet", new { id = id});
         }
 
         public ActionResult ShowPeople(int id)
