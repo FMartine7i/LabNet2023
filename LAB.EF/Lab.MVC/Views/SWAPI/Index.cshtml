@@ -1,73 +1,35 @@
-﻿@model Lab.MVC.Models.Model
+﻿@model List<Lab.MVC.Models.PersonModel>
 
 @{
-    ViewBag.Title = "SWAPI";
+    ViewBag.Title = "Swapi";
 }
 
-<!DOCTYPE html>
+<h2>STAR WARS API</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    @using (Html.BeginForm("ShowPlanet", "Planet", FormMethod.Get))
-    {
-        <label for="id">ID:</label>
-        <input type="text" name="id" id="id">
-        <input type="submit" value="Get data">
-    
-
-    <section>
-        <h2>Planets</h2>
-        <ul>           
-            <li>Name: @Model.Planet.Name</li>
-            <li>Rotation period: @Model.Planet.RotationPeriod</li>
-            <li>Orbital period: @Model.Planet.OrbitalPeriod</li>
-            <li>Climate: @Model.Planet.Climate</li>
-            <li>Terrain: @Model.Planet.Terrain</li>
-            <li>Population: @Model.Planet.Population</li>
-        </ul>
-    </section>
-    }
-
-    <section>
-        <h2>People</h2>
-        <ul>
-            <li>Name: @Model.People.Name</li>
-            <li>Homeworld: @Model.People.Homeworld</li>
-            <li>Height: @Model.People.Height</li>
-            <li>Mass: @Model.People.Mass</li>
-            <li>Gender: @Model.People.Gender</li>
-            <li>Eye color: @Model.People.EyeColor</li>
-            <li>Hair color: @Model.People.HairColor</li>
-            <li>Birth: @Model.People.Birth</li>
-        </ul>
-    </section>
-    <section>
-        <h2>Species</h2>
-        <ul>
-            <li>Name: @Model.Species.Name</li>
-            <li>Clasification: @Model.Species.Clasification</li>
-            <li>Designation: @Model.Species.Designation</li>
-            <li>Average Height: @Model.Species.AvgHeight</li>
-            <li>Eye colors: @Model.Species.EyeColors</li>
-            <li>Average lifespan : @Model.Species.AvgLifespan</li>
-            <li>Language: @Model.Species.Language</li>
-        </ul>
-    </section>
-    <section>
-        <h2>Ships</h2>
-        <ul>
-            <li>Name: @Model.Ships.Name</li>
-            <li>Model: @Model.Ships.Model</li>
-            <li>Length: @Model.Ships.Length</li>
-            <li>Class : @Model.Ships.Class</li>
-            <li>Cost: @Model.Ships.Cost</li>
-            <li>Crew: @Model.Ships.Crew</li>
-            <li>Max speed: @Model.Ships.MaxSpeed</li>
-        </ul>
-    </section>
-</body>
-</html>
+<table class="table table-hover table-dark" style="margin-bottom: 3rem";>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Homeworld</th>
+            <th>Height</th>
+            <th>Mass</th>
+            <th>Eye color</th>
+            <th>Hair color</th>
+            <th>Gender</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model)
+        {
+            <tr>
+                <td>@person.Name</td>
+                <td>@person.Homeworld</td>
+                <td>@person.Height</td>
+                <td>@person.Mass</td>
+                <td>@person.Eye_Color</td>
+                <td>@person.Hair_Color</td>
+                <td>@person.Gender</td>
+            </tr>
+        }
+    </tbody>
+</table>

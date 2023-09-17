@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Lab.MVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,29 +12,26 @@ namespace Lab.MVC.Controllers
     public class SwapiController : Controller
     {
         // GET: Swapi
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            return await GetPerson();
         }
 
-        public ActionResult ShowPlanet(int id)
+        public async Task<ActionResult> GetPerson()
         {
-            return RedirectToAction("GetPlanet", "Planet", new { id = id});
-        }
+            HttpClient client = new HttpClient();
+            string url = $"https://swapi.dev/api/people";
 
-        public ActionResult ShowPeople(int id)
-        {
-            return RedirectToAction("GetPerson", "People", new { id = id });
-        }
+            HttpResponseMessage response = await client.GetAsync(url);
+            List<PersonModel> people = null;
 
-        public ActionResult ShowSpecies(int id)
-        {
-            return RedirectToAction("GetSpecies", "Species", new { id = id });
-        }
-
-        public ActionResult ShowShip(int id)
-        {
-            return RedirectToAction("GetShip", "Ships", new { id = id });
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var apiResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiResponse<PersonModel>>(content);
+                people = apiResponse.Results;
+            }
+            return View("Index", people);
         }
     }
 }
