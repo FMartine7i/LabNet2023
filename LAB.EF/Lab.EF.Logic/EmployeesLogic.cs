@@ -1,5 +1,5 @@
-﻿using Lab.EF.Entities;
-using System;
+﻿using Lab.EF.Data;
+using Lab.EF.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,10 +8,20 @@ namespace Lab.EF.Logic
 {
     public class EmployeesLogic : BaseLogic, IABMLogic<Employees>
     {
+        public EmployeesLogic(NorthwindContext dbContext) : base(dbContext)
+        {
+        }
+
         public void Add(Employees newEmployee)
         {
             context.Employees.Add(newEmployee);
             context.SaveChanges();
+        }
+
+        public Employees GetEmployeeByID(int EmployeeID)
+        {
+            var eContext = context.Employees;
+            return eContext.FirstOrDefault(e => e.EmployeeID == EmployeeID);
         }
 
         public void Delete(int ID)
@@ -30,9 +40,19 @@ namespace Lab.EF.Logic
             return context.Employees.ToList();
         }
 
-        public void Update(Employees categories)
+        public void Update(Employees employee)
         {
-            throw new NotImplementedException();
+            var employeeUpdate = context.Employees.Find(employee.EmployeeID);
+
+            if (employeeUpdate != null)
+            {
+                employeeUpdate.FirstName = employee.FirstName;
+                employeeUpdate.LastName = employee.LastName;
+                employeeUpdate.City = employee.City;
+                employeeUpdate.Country = employee.Country;
+                employeeUpdate.HireDate = employee.HireDate;
+                context.SaveChanges();
+            }
         }
     }
 }

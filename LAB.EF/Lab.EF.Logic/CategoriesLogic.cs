@@ -8,6 +8,11 @@ namespace Lab.EF.Logic
 {
     public class CategoriesLogic : BaseLogic, IABMLogic<Categories>
     {
+        public CategoriesLogic(NorthwindContext context) : base(context) 
+        { 
+        
+        }
+
         public List<Categories> GetAll()
         {
             return context.Categories.ToList();

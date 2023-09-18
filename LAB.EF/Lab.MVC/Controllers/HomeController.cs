@@ -1,8 +1,4 @@
-﻿using Lab.MVC.Models;
-using Newtonsoft.Json;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace Lab.MVC.Controllers
 {
