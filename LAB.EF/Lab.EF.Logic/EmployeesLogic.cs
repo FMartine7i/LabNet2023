@@ -1,5 +1,4 @@
-﻿using Lab.EF.Data;
-using Lab.EF.Entities;
+﻿using Lab.EF.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,9 +7,6 @@ namespace Lab.EF.Logic
 {
     public class EmployeesLogic : BaseLogic, IABMLogic<Employees>
     {
-        public EmployeesLogic(NorthwindContext dbContext) : base(dbContext)
-        {
-        }
 
         public void Add(Employees newEmployee)
         {

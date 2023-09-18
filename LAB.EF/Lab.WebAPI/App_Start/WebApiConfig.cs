@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace Lab.WebAPI
 {
@@ -19,6 +16,12 @@ namespace Lab.WebAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "SwaggerApi",
+                routeTemplate:"swagger/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+                );
         }
     }
 }

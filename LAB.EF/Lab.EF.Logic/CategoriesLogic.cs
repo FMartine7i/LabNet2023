@@ -1,5 +1,6 @@
 ﻿using Lab.EF.Data;
 using Lab.EF.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,10 +9,6 @@ namespace Lab.EF.Logic
 {
     public class CategoriesLogic : BaseLogic, IABMLogic<Categories>
     {
-        public CategoriesLogic(NorthwindContext context) : base(context) 
-        { 
-        
-        }
 
         public List<Categories> GetAll()
         {
@@ -40,12 +37,17 @@ namespace Lab.EF.Logic
         {
             var categoryUpdate = context.Categories.Find(categories.CategoryID);
 
-            if (categoryUpdate != null)
+            try
             {
+                categoryUpdate.CategoryID = categories.CategoryID;
                 categoryUpdate.CategoryName = categories.CategoryName;
                 categoryUpdate.Description = categories.Description;
                 context.SaveChanges();
-            }            
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public bool CategoryExists(int categoryID)      // Este método busca dentro de la BD la ID buscada, en este caso, para 'categories'. Luego sirve para que la lógica del test avise si encontró una ID igual o se puede ingresar correctamente la nueva categoría
@@ -54,6 +56,11 @@ namespace Lab.EF.Logic
             {
                 return dbContext.Categories.Any(c => c.CategoryID == categoryID);
             }
+        }
+
+        public Categories GetCategoryID(int id)
+        {
+            return context.Categories.Find(id);
         }
     }
 }

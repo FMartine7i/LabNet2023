@@ -6,9 +6,9 @@ namespace Lab.EF.Logic
     {
         protected readonly NorthwindContext context;
 
-        public BaseLogic(NorthwindContext dbContext)
+        public BaseLogic()
         {
-            context = dbContext;
+            context = new NorthwindContext();
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Lab.EF.Logic
 {
     public class ShippersLogic : BaseLogic, IABMLogic<Shippers>
     {
+
         public void Add(Shippers item)
         {
             throw new NotImplementedException();

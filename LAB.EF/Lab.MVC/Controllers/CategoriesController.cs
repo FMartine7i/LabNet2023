@@ -4,7 +4,6 @@ using Lab.EF.Logic;
 using Lab.MVC.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -12,12 +11,6 @@ namespace Lab.MVC.Controllers
 {
     public class CategoriesController : Controller
     {
-        protected readonly NorthwindContext context;
-
-        public CategoriesController()
-        {
-            context = new NorthwindContext();
-        }
         CategoriesLogic logic = new CategoriesLogic(); 
 
         public ActionResult Index()
@@ -84,50 +77,53 @@ namespace Lab.MVC.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [HttpGet]
         public ActionResult Update(int id)
         {
-            Categories categoriesEntity = context.Categories.Find(id);
-
-            if (categoriesEntity == null)
+            try
             {
-                return HttpNotFound();
+                Categories categories = logic.GetCategoryID(id);
+                CategoriesView categoriesView = new CategoriesView
+                {
+                    Id = categories.CategoryID,
+                    Name = categories.CategoryName,
+                    Description = categories.Description,
+                };
+
+                return View(categoriesView);
             }
-
-            CategoriesView categoriesView = new CategoriesView
+            catch (Exception)
             {
-                Id = categoriesEntity.CategoryID,
-                Name = categoriesEntity.CategoryName,
-                Description = categoriesEntity.Description
-            };
-
-            return View(categoriesView);
+                return RedirectToAction("Index", "Error");
+            }
         }
 
         [HttpPost]
         public ActionResult Update(CategoriesView categoriesView)
         {
-            try
-            {
-                if(ModelState.IsValid)
-                {
-                    Categories categoriesEntity = new Categories
-                    {
-                        CategoryID = categoriesView.Id,
-                        CategoryName = categoriesView.Name,
-                        Description = categoriesView.Description,
-                    };
 
-                    logic.Update(categoriesEntity);
-                    return RedirectToAction("Index");
-                }
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            try 
+            {
+                var categoriesEntity = new Categories
+                {
+                    CategoryID = categoriesView.Id,
+                    CategoryName = categoriesView.Name,
+                    Description = categoriesView.Description
+                };
+
+                logic.Update(categoriesEntity);
                 return RedirectToAction("Index");
             }
-            catch (DbUpdateException ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Excepción de la base de datos: {ex.Message}");
                 return RedirectToAction("Index", "Error");
-            }          
+            }
+            
         }
     }
 }
