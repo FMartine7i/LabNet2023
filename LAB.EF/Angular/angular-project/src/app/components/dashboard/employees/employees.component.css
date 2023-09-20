@@ -1,0 +1,56 @@
+.body-table{
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 75%;
+  margin-bottom: 10%;
+}
+
+.span-style{
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.button-class{
+  width: 55px;
+  height: 55px;
+  margin: 10px 0 10px;
+  border-radius: 10px;
+  background-color: #6b1fb3;
+  box-shadow:  2px 5px 5px 1px rgba(0, 0, 0, 0.5);
+  border: none;
+}
+
+#create:hover, #edit:hover{
+  background: linear-gradient(45deg, #13d172, #73f5bf, #10f58a);
+  background-size: 200%;
+  animation: color 0.5s ease-in;
+}
+
+#delete:hover{
+  background: linear-gradient(45deg, #d11362, #f573a9, #f5105c);
+  background-size: 200%;
+  animation: color 0.5s ease-in;
+} 
+
+#create:active, #edit:active{
+  background-color: #1fdd94 !important;
+}
+
+#delete:active{
+  background-color: #f04368;
+}
+
+@keyframes color{
+  0%{
+      background-position: 0 50%;
+  }
+  100%{
+      background-position: 100% 50%;
+  }
+}

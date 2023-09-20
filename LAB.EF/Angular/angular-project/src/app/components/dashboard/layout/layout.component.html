@@ -1,0 +1,110 @@
+<link href="layout.component.css" rel="stylesheet">
+
+<header class="">  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-purple header-rounded" aria-label="Offcanvas navbar large">
+    <div class="container-fluid" style="margin-left: 2vw; margin-right: 2.5vw;">
+      <a class="navbar-brand navbar-style" href="#">Practica 8</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+        <div class="text-bg-purple dropdown-bg-responsive offcanvas-size offcanvas offcanvas-end div-flex" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+          <div class="offcanvas-header">
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+
+          <div>
+            <div class="offcanvas-body div-contain">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" [routerLink]="['/dashboard/layout/home']">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" [routerLink]="['/dashboard/layout/employees']">
+                            Employees
+                        </a>
+                </li>
+                <li class="nav-item">
+                    <div class="div-bar">
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg class= "dark-svg" style="margin-right: 10px;" fill="#c9c4cedb" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M248,88a8.00008,8.00008,0,0,1-8,8H224v16a8,8,0,0,1-16,0V96H192a8,8,0,0,1,0-16h16V64a8,8,0,0,1,16,0V80h16A8.00008,8.00008,0,0,1,248,88ZM152,48h8v8a8,8,0,0,0,16,0V48h8a8,8,0,0,0,0-16h-8V24a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16Zm64.457,96.64941a7.985,7.985,0,0,0-2.15576.35254A84.0314,84.0314,0,0,1,111.01514,41.6377a8.00171,8.00171,0,0,0-9.96485-9.96192A100.01377,100.01377,0,1,0,224.33936,154.89746a8.00114,8.00114,0,0,0-7.88233-10.24805Z"/>                      
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu dropdown-bg" style="width: 5.75rem;">
+                        <li>
+                            <a class="dropdown-item a-hover" href="#">
+                                <div style="display: flex; align-items: center; justify-content: center;" class="nav-hover">
+                                <svg style="margin-right: 10px;" fill="#5c5c5c" width="30px" height="30px" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M248,88a8.00008,8.00008,0,0,1-8,8H224v16a8,8,0,0,1-16,0V96H192a8,8,0,0,1,0-16h16V64a8,8,0,0,1,16,0V80h16A8.00008,8.00008,0,0,1,248,88ZM152,48h8v8a8,8,0,0,0,16,0V48h8a8,8,0,0,0,0-16h-8V24a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16Zm64.457,96.64941a7.985,7.985,0,0,0-2.15576.35254A84.0314,84.0314,0,0,1,111.01514,41.6377a8.00171,8.00171,0,0,0-9.96485-9.96192A100.01377,100.01377,0,1,0,224.33936,154.89746a8.00114,8.00114,0,0,0-7.88233-10.24805Z"/>                      
+                                </svg>
+                                <span  class="span-class">Dark</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item a-hover" href="#">
+                                <div style="display: flex; align-items: center; justify-content: center; " class="nav-hover">
+                                <svg style="margin-right: 10px;" version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="35px" height="35px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+                                    <g>
+                                        <circle fill-rule="evenodd" clip-rule="evenodd" fill="#5c5c5c" cx="32.003" cy="32.005" r="16.001"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" fill="#5c5c5c" d="M12.001,31.997c0-2.211-1.789-4-4-4H4c-2.211,0-4,1.789-4,4   s1.789,4,4,4h4C10.212,35.997,12.001,34.208,12.001,31.997z"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" fill="#5c5c5c" d="M12.204,46.139l-2.832,2.833c-1.563,1.562-1.563,4.094,0,5.656   c1.562,1.562,4.094,1.562,5.657,0l2.833-2.832c1.562-1.562,1.562-4.095,0-5.657C16.298,44.576,13.767,44.576,12.204,46.139z"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" fill="#5c5c5c" d="M32.003,51.999c-2.211,0-4,1.789-4,4V60c0,2.211,1.789,4,4,4   s4-1.789,4-4l-0.004-4.001C36.003,53.788,34.21,51.999,32.003,51.999z"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" fill="#5c5c5c" d="M51.798,46.143c-1.559-1.566-4.091-1.566-5.653-0.004   s-1.562,4.095,0,5.657l2.829,2.828c1.562,1.57,4.094,1.562,5.656,0s1.566-4.09,0-5.656L51.798,46.143z"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" fill="#5c5c5c" d="M60.006,27.997l-4.009,0.008   c-2.203-0.008-3.992,1.781-3.992,3.992c-0.008,2.211,1.789,4,3.992,4h4.001c2.219,0.008,4-1.789,4-4   C64.002,29.79,62.217,27.997,60.006,27.997z"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" fill="#5c5c5c" d="M51.798,17.859l2.828-2.829c1.574-1.566,1.562-4.094,0-5.657   c-1.559-1.567-4.09-1.567-5.652-0.004l-2.829,2.836c-1.562,1.555-1.562,4.086,0,5.649C47.699,19.426,50.239,19.418,51.798,17.859z"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" fill="#5c5c5c" d="M32.003,11.995c2.207,0.016,4-1.789,4-3.992v-4   c0-2.219-1.789-4-4-4c-2.211-0.008-4,1.781-4,3.993l0.008,4.008C28.003,10.206,29.792,11.995,32.003,11.995z"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" fill="#5c5c5c" d="M12.212,17.855c1.555,1.562,4.079,1.562,5.646-0.004   c1.574-1.551,1.566-4.09,0.008-5.649l-2.829-2.828c-1.57-1.571-4.094-1.559-5.657,0c-1.575,1.559-1.575,4.09-0.012,5.653   L12.212,17.855z"/>
+                                    </g>
+                                    </svg>
+                                    <span class="span-class">Light</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item a-hover" href="#">
+                                <div style="display: flex; align-items: center; justify-content: center;" class="nav-hover">
+                                <svg style="margin-right: 10px;" width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="9" stroke="#5c5c5c" stroke-width="2"/>
+                                    <path d="M18.364 5.63604C16.6761 3.94821 14.3869 3 12 3C9.61305 3 7.32387 3.94821 5.63604 5.63604C3.94821 7.32387 3 9.61305 3 12C3 14.3869 3.94821 16.6761 5.63604 18.364L12 12L18.364 5.63604Z" fill="#5c5c5c"/>
+                                </svg>
+                                <span  class="span-class">Auto</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                </ul>
+                <div class="form-container">
+                    <form class="d-flex mt-3 mt-lg-0 form-size" role="search">
+                        <input class="form-control me-2 input-text-style" type="search" placeholder="Search" style="font-weight: 200;" aria-label="Search">
+                        <button class="btn btn-outline-success search-style" type="submit" style="font-weight: 200;">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+    <router-outlet></router-outlet>
+</main>
+
+<footer>
+    <div class="social-icons-container">
+        <a href="https://en-gb.facebook.com/RiotGames" class="social-icon"></a>
+        <span class="copyright">&copy;2023, Federico Martinetti.</span>
+    </div>
+</footer>
