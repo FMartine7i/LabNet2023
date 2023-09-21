@@ -1,14 +1,19 @@
 .body-table{
   width: 100%;
-  height: 80vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .container {
-  width: 75%;
-  margin-bottom: 10%;
+  width: 70%;
+  height: 100%;
+  margin: 1% 0 7%;
+}
+
+.span-add{
+  margin-right: 5px;
 }
 
 .span-style{
@@ -26,31 +31,40 @@
   border: none;
 }
 
-#create:hover, #edit:hover{
-  background: linear-gradient(45deg, #13d172, #73f5bf, #10f58a);
+#create:hover{
+  /* background: linear-gradient(45deg, #13d172, #73f5bf, #10f58a);
   background-size: 200%;
-  animation: color 0.5s ease-in;
+  animation: color 0.5s ease-in; */
+  background: #fff !important;
+  color: #9112e6;
+}
+
+#edit:hover{
+  background: #fff !important;
+  color: #1acbd8;
 }
 
 #delete:hover{
-  background: linear-gradient(45deg, #d11362, #f573a9, #f5105c);
+  /* background: linear-gradient(45deg, #d11362, #f573a9, #f5105c);
   background-size: 200%;
-  animation: color 0.5s ease-in;
+  animation: color 0.5s ease-in; */
+
+  background: #fff;
+  color: #9112e6;
 } 
 
 #create:active, #edit:active{
   background-color: #1fdd94 !important;
+  color: #fff;
 }
 
 #delete:active{
   background-color: #f04368;
+  color: #fff;
 }
 
-@keyframes color{
-  0%{
-      background-position: 0 50%;
-  }
-  100%{
-      background-position: 100% 50%;
-  }
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 70%;
+  height: 4.6rem;
 }

@@ -1,6 +1,8 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { employee } from 'src/app/core/models/employee_model';
 
 @Component({
   selector: 'app-employees',
@@ -8,43 +10,50 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
   templateUrl: './employees.component.html',
 })
 export class EmployeesComponent implements AfterViewInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'edit', 'delete'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  displayedColumns: string[] = ['id', 'first_name', 'last_name', 'hire_date', 'city', 'edit', 'delete'];
+  dataSource = new MatTableDataSource<employee>(list_employees);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  edit_employee(employee_name:string){
+    console.log('Edit: ', employee_name)
+  }
+
+  delete_employee(employee_name:string){
+    console.log('Delete: ', employee_name)
   }
 }
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  delete: string;
-  edit: string;
-}
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, edit: '', delete: 'H',},
-  {position: 2, name: 'Helium', weight: 4.0026,  edit: '', delete: 'He',},
-  {position: 3, name: 'Lithium', weight: 6.941, edit: '', delete: 'H',},
-  {position: 4, name: 'Beryllium', weight: 9.0122, edit: '', delete: 'H',},
-  {position: 5, name: 'Boron', weight: 10.811, edit: '', delete: 'H',},
-  {position: 6, name: 'Carbon', weight: 12.0107, edit: '', delete: 'H',},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, edit: '', delete: 'H',},
-  {position: 8, name: 'Oxygen', weight: 15.9994, edit: '', delete: 'H',},
-  {position: 9, name: 'Fluorine', weight: 18.9984, edit: '', delete: 'H',},
-  {position: 10, name: 'Neon', weight: 20.1797, edit: '', delete: 'H',},
-  {position: 11, name: 'Sodium', weight: 22.9897, edit: '', delete: 'H',},
-  {position: 12, name: 'Magnesium', weight: 24.305, edit: '', delete: 'H',},
-  {position: 13, name: 'Aluminum', weight: 26.9815, edit: '', delete: 'H',},
-  {position: 14, name: 'Silicon', weight: 28.0855, edit: '', delete: 'H',},
-  {position: 15, name: 'Phosphorus', weight: 30.9738, delete: 'P', edit: ''},
-  {position: 16, name: 'Sulfur', weight: 32.065, delete: 'S', edit: ''},
-  {position: 17, name: 'Chlorine', weight: 35.453, delete: 'Cl', edit: ''},
-  {position: 18, name: 'Argon', weight: 39.948, delete: 'Ar', edit: ''},
-  {position: 19, name: 'Potassium', weight: 39.0983, delete: 'K', edit: ''},
-  {position: 20, name: 'Calcium', weight: 40.078, delete: 'Ca', edit: ''},
+const list_employees: employee[] = [
+  {id: 1, first_name: 'Federico', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "Bahia Blanca"},
+  {id: 2, first_name: 'Fede', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "sdsoxclqwpeoip"},
+  {id: 3, first_name: 'Fede', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "Bahia"},
+  {id: 4, first_name: 'Fede', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "Bahia"},
+  {id: 5, first_name: 'Fede', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "Bahia"},
+  {id: 6, first_name: 'Fede', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "Bahia"},
+  {id: 7, first_name: 'Fede', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "Bahia"},
+  {id: 8, first_name: 'Fede', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "Bahia"},
+  {id: 9, first_name: 'Fede', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "Bahia"},
+  {id: 10, first_name: 'Fede', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "Bahia"},
+  {id: 11, first_name: 'Fede', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "Bahia"},
+  {id: 12, first_name: 'Fede', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "Bahia"},
+  {id: 13, first_name: 'Fede', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "Bahia"},
+  {id: 14, first_name: 'Fede', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "Bahia"},
+  {id: 15, first_name: 'Fede', last_name: 'Martinetti',hire_date: new Date('2023-09-20T00:00:00'), city: "Bahia"},
 ];
