@@ -7,5 +7,6 @@ namespace Lab.WebAPI.Services
 {
     public class EmployeesService
     {
+
     }
 }

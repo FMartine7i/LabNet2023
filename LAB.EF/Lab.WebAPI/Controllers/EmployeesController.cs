@@ -12,7 +12,6 @@ namespace Lab.WebAPI.Controllers
 {
     public class EmployeesController : ApiController
     {
-        // GET: Employees
         private readonly EmployeesLogic _logic;
 
         public EmployeesController(EmployeesLogic logic)
@@ -20,46 +19,61 @@ namespace Lab.WebAPI.Controllers
             _logic = logic;
         }
 
-        // GET: api/Suppliers
-        public IEnumerable<EmployeesView> GetEmployees()
+        // GET: api/Employees
+        public IHttpActionResult GetEmployees()
         {
-            var employees = _logic.GetAll();
-
-            return employees.Select(x => new EmployeesView
+            try
             {
-                EmployeeID = x.EmployeeID,
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                HireDate = x.HireDate,
-                City = x.City,
-                Country = x.Country,
-            });
+                var employees = _logic.GetAll();
+                var employeeViews = employees.Select(e => new EmployeesView
+                {
+                    EmployeeID = e.EmployeeID,
+                    FirstName = e.FirstName,
+                    LastName = e.LastName,
+                    HireDate = e.HireDate,
+                    City = e.City,
+                    Country = e.Country,
+                });
+
+                return Ok(employeeViews);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
-        // GET: api/Suppliers
+        // GET: api/Employees/{id}
         [ResponseType(typeof(EmployeesView))]
         public IHttpActionResult GetEmployeesID(int ID)
         {
-            var employees = _logic.GetEmployeeByID(ID);
-
-            if (employees == null)
+            try
             {
-                return NotFound();
+                var employees = _logic.GetEmployeeByID(ID);
+
+                if (employees == null)
+                {
+                    return NotFound();
+                }
+
+                EmployeesView eView = new EmployeesView
+                {
+                    FirstName = employees.FirstName,
+                    LastName = employees.LastName,
+                    HireDate = employees.HireDate,
+                    City = employees.City,
+                    Country = employees.Country,
+                };
+
+                return Ok(eView);
             }
-
-            EmployeesView eView = new EmployeesView
+            catch (Exception ex)
             {
-                FirstName = employees.FirstName,
-                LastName = employees.LastName,
-                HireDate = employees.HireDate,
-                City = employees.City,
-                Country = employees.Country,
-            };
-
-            return Ok(eView);
+                return InternalServerError(ex);
+            }
         }
 
-        // POST: api/Suppliers
+        // POST: api/Employees
         [ResponseType(typeof(EmployeesView))]
         public IHttpActionResult PostEmployee(EmployeesView employee)
         {
@@ -68,79 +82,78 @@ namespace Lab.WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var newEmployee = new Employees
-            {
-                FirstName = employee.FirstName,
-                LastName = employee.LastName,
-                HireDate = employee.HireDate,
-                City = employee.City,
-                Country = employee.Country,
-            };
+            try 
+            { 
+                var newEmployee = new Employees
+                {
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    HireDate = employee.HireDate,
+                    City = employee.City,
+                    Country = employee.Country,
+                };
 
-            try
-            {
                 _logic.Add(newEmployee);
+
+                return CreatedAtRoute("DefaultApi", new { id = newEmployee.EmployeeID }, newEmployee);
             }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = newEmployee.EmployeeID }, newEmployee);
+            }            
         }
 
-        // PUT: api/Suppliers/{id}
+        // PUT: api/Employees/{id}
         [ResponseType(typeof(void))]
         public IHttpActionResult UpdateEmployee(int id, EmployeesUpdate employee)
         {
+            if (id != employee.EmployeeID)
+            {
+                return BadRequest("Las ID no coinciden");
+            }
+
             if (ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != employee.EmployeeID)
-            {
-                return BadRequest("Las ID no coincide");
-            }
-
-            var eEmployee = _logic.GetEmployeeByID(id);
-
-            if (eEmployee == null)
-            {
-                return NotFound();
-            }
-
-            eEmployee.FirstName = employee.FirstName;
-            eEmployee.LastName = employee.LastName;
-            eEmployee.HireDate = employee.HireDate;
-            eEmployee.City = employee.City;
-            eEmployee.Country = employee.Country;
-
             try
-            {
+            { 
+                var eEmployee = _logic.GetEmployeeByID(id);
+
+                if (eEmployee == null)
+                {
+                    return NotFound();
+                }
+
+                eEmployee.FirstName = employee.FirstName;
+                eEmployee.LastName = employee.LastName;
+                eEmployee.HireDate = employee.HireDate;
+                eEmployee.City = employee.City;
+                eEmployee.Country = employee.Country;
+
                 _logic.Update(eEmployee);
+                return StatusCode(HttpStatusCode.NoContent);
             }
             catch (Exception ex)
             {
                 return InternalServerError(ex);
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            }          
         }
 
-        // DELETE: api/Suppliers/{id}
+        // DELETE: api/Employees/{id}
         [ResponseType(typeof(EmployeesView))]
         public IHttpActionResult DeleteEmployee(int id)
         {
-            var eEmployee = _logic.GetEmployeeByID(id);
-
-            if (eEmployee == null)
-            {
-                return NotFound();
-            }
-
             try
-            {
+            { 
+                var eEmployee = _logic.GetEmployeeByID(id);
+
+                if (eEmployee == null)
+                {
+                    return NotFound();
+                }
+
                 _logic.Delete(id);
                 return Ok("Employee deleted");
             }
