@@ -31,7 +31,7 @@ export class LoginComponent {
     const user_name = this.formLogin.value.user_name;
     const password = this.formLogin.value.password;
 
-    if(user_name == 'fede@mail.com' && password == '123'){
+    if(user_name == 'admin' && password == '123'){
       this.fake_redirection()
     }
     else{

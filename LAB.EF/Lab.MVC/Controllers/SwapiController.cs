@@ -1,6 +1,6 @@
 ﻿using Lab.MVC.Models;
-using System.Collections.Generic;
-using System.Net.Http;
+using Lab.MVC.SwapiService;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -8,27 +8,28 @@ namespace Lab.MVC.Controllers
 {
     public class SwapiController : Controller
     {
-        // GET: Swapi
-        public async Task<ActionResult> Index()
+        private readonly SwapiServices _swapiService;
+
+        public SwapiController()
         {
-            return await GetPerson();
+            _swapiService = new SwapiServices();
         }
 
-        public async Task<ActionResult> GetPerson()
+        public async Task<ActionResult> Index()
         {
-            HttpClient client = new HttpClient();
-            string url = $"https://swapi.dev/api/people";
+            var data = await _swapiService.GetPerson();
 
-            HttpResponseMessage response = await client.GetAsync(url);
-            List<PersonModel> people = null;
-
-            if (response.IsSuccessStatusCode)
+            if (!string.IsNullOrEmpty(data))
             {
-                var content = await response.Content.ReadAsStringAsync();
-                var apiResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiResponse<PersonModel>>(content);
-                people = apiResponse.Results;
+                var apiResponse = JsonConvert.DeserializeObject<ApiResponse<PersonModel>>(data);
+                var people = apiResponse.Results;
+                return View("Index", people);
             }
-            return View("Index", people);
+            else
+            {
+                // Manejar el caso de respuesta vacía o error.
+                return View("Error");
+            }
         }
     }
 }

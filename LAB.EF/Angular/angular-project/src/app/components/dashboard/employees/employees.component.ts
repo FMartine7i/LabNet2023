@@ -3,6 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { employee } from 'src/app/core/models/employee_model';
+import { EmployeeServiceService } from '../../service/employee.service.service';
 
 @Component({
   selector: 'app-employees',
@@ -15,6 +16,14 @@ export class EmployeesComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private employee_service: EmployeeServiceService) {
+
+  }
+
+  ngOnInit(): void {
+    this.get_all();
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -36,6 +45,17 @@ export class EmployeesComponent implements AfterViewInit {
 
   delete_employee(employee_name:string){
     console.log('Delete: ', employee_name)
+  }
+
+  get_all(){
+    this.employee_service.getAllEmployees().subscribe({
+      next : (result) => {
+        console.log(result);
+      },
+      error: (e) =>{
+        console.log(e);
+      }
+    })
   }
 }
 

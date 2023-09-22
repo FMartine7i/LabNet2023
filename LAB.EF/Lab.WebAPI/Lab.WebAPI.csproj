@@ -171,6 +171,7 @@
     <Compile Include="Models\EmployeesUpdate.cs" />
     <Compile Include="Models\EmployeesView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\EmployeesService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
