@@ -6,6 +6,7 @@ namespace Lab.WebAPI
     {
         public static void Register(HttpConfiguration config)
         {
+            config.EnableCors();
             // Web API configuration and services
 
             // Web API routes
@@ -16,12 +17,6 @@ namespace Lab.WebAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-
-            config.Routes.MapHttpRoute(
-                name: "SwaggerApi",
-                routeTemplate:"swagger/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-                );
         }
     }
 }

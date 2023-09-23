@@ -7,8 +7,9 @@ namespace Lab.EF.Logic
 {
     public class ShippersLogic : BaseLogic, IABMLogic<Shippers>
     {
+        public ShippersLogic() : base() { }
 
-        public void Add(Shippers item)
+        public Shippers Add(Shippers shippers)
         {
             throw new NotImplementedException();
         }
@@ -23,7 +24,7 @@ namespace Lab.EF.Logic
             return context.Shippers.ToList();
         }
 
-        public void Update(Shippers categories)
+        public void Update(Shippers shippers)
         {
             throw new NotImplementedException();
         }

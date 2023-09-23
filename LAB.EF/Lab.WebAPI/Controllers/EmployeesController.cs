@@ -1,4 +1,5 @@
 ﻿using Lab.EF.Entities;
+using Lab.EF.Entities.DTOs;
 using Lab.EF.Logic;
 using Lab.WebAPI.Models;
 using System;
@@ -7,35 +8,24 @@ using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Cors;
 
 namespace Lab.WebAPI.Controllers
 {
+    [EnableCors(origins: "http://localhost:4200", headers:"*", methods:"*")]
     public class EmployeesController : ApiController
     {
-        private readonly EmployeesLogic _logic;
-
-        public EmployeesController(EmployeesLogic logic)
-        {
-            _logic = logic;
-        }
-
         // GET: api/Employees
         public IHttpActionResult GetEmployees()
         {
             try
             {
-                var employees = _logic.GetAll();
-                var employeeViews = employees.Select(e => new EmployeesView
-                {
-                    EmployeeID = e.EmployeeID,
-                    FirstName = e.FirstName,
-                    LastName = e.LastName,
-                    HireDate = e.HireDate,
-                    City = e.City,
-                    Country = e.Country,
-                });
+                var employeesLogic = new EmployeesLogic();
 
-                return Ok(employeeViews);
+                List<EmployeesDTO> employeesViews = employeesLogic.GetAll();
+
+
+                return Ok(employeesViews);
             }
             catch (Exception ex)
             {
@@ -49,20 +39,20 @@ namespace Lab.WebAPI.Controllers
         {
             try
             {
-                var employees = _logic.GetEmployeeByID(ID);
+                var employees = new EmployeesLogic();
+                var employee = employees.GetEmployeeByID(ID);
 
-                if (employees == null)
+                if (employee == null)
                 {
                     return NotFound();
                 }
 
                 EmployeesView eView = new EmployeesView
                 {
-                    FirstName = employees.FirstName,
-                    LastName = employees.LastName,
-                    HireDate = employees.HireDate,
-                    City = employees.City,
-                    Country = employees.Country,
+                    FirstName = employee.FirstName,
+                    LastName = employee.LastName,
+                    HireDate = employee.HireDate,
+                    City = employee.City,
                 };
 
                 return Ok(eView);
@@ -74,8 +64,8 @@ namespace Lab.WebAPI.Controllers
         }
 
         // POST: api/Employees
-        [ResponseType(typeof(EmployeesView))]
-        public IHttpActionResult PostEmployee(EmployeesView employee)
+        [ResponseType(typeof(EmployeesDTO))]
+        public IHttpActionResult PostEmployee(EmployeesDTO employeesDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -83,17 +73,9 @@ namespace Lab.WebAPI.Controllers
             }
 
             try 
-            { 
-                var newEmployee = new Employees
-                {
-                    FirstName = employee.FirstName,
-                    LastName = employee.LastName,
-                    HireDate = employee.HireDate,
-                    City = employee.City,
-                    Country = employee.Country,
-                };
-
-                _logic.Add(newEmployee);
+            {
+                EmployeesLogic employeesLogic = new EmployeesLogic();
+                var newEmployee = employeesLogic.Add(employeesDTO);
 
                 return CreatedAtRoute("DefaultApi", new { id = newEmployee.EmployeeID }, newEmployee);
             }
@@ -105,7 +87,7 @@ namespace Lab.WebAPI.Controllers
 
         // PUT: api/Employees/{id}
         [ResponseType(typeof(void))]
-        public IHttpActionResult UpdateEmployee(int id, EmployeesUpdate employee)
+        public IHttpActionResult UpdateEmployee(int id, EmployeesDTO employee)
         {
             if (id != employee.EmployeeID)
             {
@@ -119,7 +101,8 @@ namespace Lab.WebAPI.Controllers
 
             try
             { 
-                var eEmployee = _logic.GetEmployeeByID(id);
+                EmployeesLogic employeesLogic = new EmployeesLogic();
+                var eEmployee = employeesLogic.GetEmployeeByID(id);
 
                 if (eEmployee == null)
                 {
@@ -130,9 +113,8 @@ namespace Lab.WebAPI.Controllers
                 eEmployee.LastName = employee.LastName;
                 eEmployee.HireDate = employee.HireDate;
                 eEmployee.City = employee.City;
-                eEmployee.Country = employee.Country;
 
-                _logic.Update(eEmployee);
+                employeesLogic.Update(eEmployee);
                 return StatusCode(HttpStatusCode.NoContent);
             }
             catch (Exception ex)
@@ -147,14 +129,14 @@ namespace Lab.WebAPI.Controllers
         {
             try
             { 
-                var eEmployee = _logic.GetEmployeeByID(id);
+                var eEmployee = new EmployeesLogic();
 
                 if (eEmployee == null)
                 {
                     return NotFound();
                 }
 
-                _logic.Delete(id);
+                eEmployee.Delete(id);
                 return Ok("Employee deleted");
             }
             catch (Exception)

@@ -1,5 +1,6 @@
 using Lab.EF.Logic;
 using Lab.EF.Entities;
+using Lab.EF.Entities.DTOs;
 
 namespace Lab.EF.UI
 {
@@ -52,9 +53,9 @@ namespace Lab.EF.UI
                 CategoriesLogic categoriesLogic = new CategoriesLogic();
                 List<string> categoryList = new List<string>(); // creo una lista para guardar cada elemento de la categoría
 
-                foreach (Categories category in categoriesLogic.GetAll())
+                foreach (CategoriesDTO category in categoriesLogic.GetAll())
                 {
-                    categoryList.Add($"{category.CategoryID} - {category.CategoryName} - {category.Description}");   // agrego a la lista cada una de las categorías
+                    categoryList.Add($"{category.CategoryID} - {category.CategoryName} - {category.CategoryDescription}");   // agrego a la lista cada una de las categorías
                 }
 
                 string categoriesText = string.Join("\n", categoryList);
@@ -65,7 +66,7 @@ namespace Lab.EF.UI
                 EmployeesLogic employeesLogic = new EmployeesLogic();
                 List<string> employeesList = new List<string>(); // creo una lista para guardar cada elemento de la categoría
 
-                foreach (Employees employees in employeesLogic.GetAll())
+                foreach (EmployeesDTO employees in employeesLogic.GetAll())
                 {
                     employeesList.Add($"{employees.EmployeeID} - {employees.FirstName} - {employees.LastName}");   // agrego a la lista cada una de las categorías
                 }
@@ -110,11 +111,11 @@ namespace Lab.EF.UI
                 }
                 else
                 {
-                    categoriesLogic.Add(new Categories
+                    categoriesLogic.Add(new CategoriesDTO
                     {
                         CategoryID = idCat,
                         CategoryName = TBName2.Text,
-                        Description = TDescription.Text,
+                        CategoryDescription = TDescription.Text,
                     });
                 }
             }
@@ -132,7 +133,7 @@ namespace Lab.EF.UI
                 {
                     EmployeesLogic employeesLogic = new EmployeesLogic();
 
-                    employeesLogic.Add(new Employees
+                    employeesLogic.Add(new EmployeesDTO
                     {
                         EmployeeID = Convert.ToInt32(NUD_IDEmp.Value),
                         FirstName = TName1.Text,
@@ -196,9 +197,9 @@ namespace Lab.EF.UI
                 {
                     CategoriesLogic categoriesLogic = new CategoriesLogic();
 
-                    categoriesLogic.Update(new Categories
+                    categoriesLogic.Update(new CategoriesDTO
                     {
-                        Description = TDescription.Text,
+                        CategoryDescription = TDescription.Text,
                         CategoryID = Convert.ToInt32(NUD_IDEmp.Value)
                     });
                 }
@@ -214,7 +215,7 @@ namespace Lab.EF.UI
                 {
                     EmployeesLogic employeesLogic = new EmployeesLogic();
 
-                    employeesLogic.Update(new Employees
+                    employeesLogic.Update(new EmployeesDTO
                     {
                         EmployeeID = Convert.ToInt32(NUD_IDEmp.Value),
                         FirstName = TName1.Text,
