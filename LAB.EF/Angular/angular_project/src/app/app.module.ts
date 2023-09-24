@@ -6,29 +6,27 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
-//Existing components
-
+// Existing imports
+import { LayoutComponent } from './components/dashboard/layout/layout.component';
+import { EmployeesComponent } from './components/dashboard/employees/employees.component';
 import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/dashboard/home/home.component';
 import { SharedModule } from './components/shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
-import { EmployeesComponent } from './components/dashboard/employees/employees.component';
-import { LayoutComponent } from './components/dashboard/layout/layout.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    LayoutComponent,
     LoginComponent,
-    HomeComponent,
     EmployeesComponent,
-    LayoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    HttpClientModule  
+    HttpClientModule   
   ],
   providers: [],
   bootstrap: [AppComponent]
