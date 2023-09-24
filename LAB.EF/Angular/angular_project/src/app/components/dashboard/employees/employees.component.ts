@@ -1,10 +1,63 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {MatPaginator} from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { employee } from 'src/app/core/model/employee-models';
+import { employees_service } from '../../service/employees.services.service';
 
 @Component({
   selector: 'app-employees',
+  styleUrls: ['./employees.component.css'],
   templateUrl: './employees.component.html',
-  styleUrls: ['./employees.component.css']
 })
-export class EmployeesComponent {
+export class EmployeesComponent implements AfterViewInit {
+  displayedColumns: string[] = ['id', 'first_name', 'last_name', 'hire_date', 'city', 'edit', 'delete'];
+  dataSource = new MatTableDataSource<employee>();
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private employee_service: employees_service) {}
+
+  ngOnInit(): void {
+    console.log('Calling get_all()');
+    this.get_all();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  edit_employee(employee_name:string){
+    console.log('Edit: ', employee_name)
+  }
+
+  delete_employee(employee_name:string){
+    console.log('Delete: ', employee_name)
+  }
+
+  get_all(){
+    this.employee_service.get_employees().subscribe({
+      next : (result) => {
+        if (result.isSuccess) {
+          console.log('Data received:', result.result);
+          this.dataSource.data = result.result;
+        }
+      },
+      error: (e) => {
+        console.log('Error:', e);
+      }
+    });
+  }
 }
+
