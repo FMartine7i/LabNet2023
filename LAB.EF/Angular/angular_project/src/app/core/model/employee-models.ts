@@ -1,7 +1,7 @@
-export interface employee{
-    id:number,
-    first_name:string,
-    last_name: string,
-    hire_date: Date,
-    city: string
+export interface employees{
+    EmployeeID: number;
+    FirstName: string;
+    LastName: string;
+    City: string;
+    Country: string;
 }

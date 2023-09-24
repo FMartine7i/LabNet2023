@@ -20,8 +20,8 @@ namespace Lab.EF.Logic
                 EmployeeID = e.EmployeeID,
                 FirstName = e.FirstName,
                 LastName = e.LastName,
-                HireDate = e.HireDate,
                 City = e.City,
+                Country = e.Country,
             }).ToList();
 
             return result;
@@ -41,9 +41,9 @@ namespace Lab.EF.Logic
                     {
                         EmployeeID = eEmployee.EmployeeID,
                         FirstName = eEmployee.FirstName,
-                        LastName = eEmployee.LastName,
-                        HireDate = eEmployee.HireDate,
+                        LastName = eEmployee.LastName,                       
                         City = eEmployee.City,
+                        Country = eEmployee.Country,
                     };
 
                     return employeeDTO;
@@ -66,8 +66,8 @@ namespace Lab.EF.Logic
             {
                 FirstName = newEmployeeDTO.FirstName,
                 LastName = newEmployeeDTO.LastName,
-                HireDate = newEmployeeDTO.HireDate,
                 City = newEmployeeDTO.City,
+                Country = newEmployeeDTO.Country,
             };
 
             context.Employees.Add(newEmployee);
@@ -108,7 +108,7 @@ namespace Lab.EF.Logic
                 employeeUpdate.FirstName = employeeDTO.FirstName;
                 employeeUpdate.LastName = employeeDTO.LastName;
                 employeeUpdate.City = employeeDTO.City;
-                employeeUpdate.HireDate = employeeDTO.HireDate;
+                employeeUpdate.Country = employeeDTO.Country;
                 context.SaveChanges();
             }
         }

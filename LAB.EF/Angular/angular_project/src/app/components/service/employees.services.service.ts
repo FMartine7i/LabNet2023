@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { response_dto } from 'src/app/core/model/response-dto';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { employees } from 'src/app/core/model/employee-models';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,10 @@ export class employees_service {
 
   constructor( private http:HttpClient ) { }
 
-  get_employees() : Observable<response_dto>{
-    
+  get_employees() {   
     let url = `${this.api_url}/employees`;
-    return this.http.get<response_dto>(url);
+    console.log("Calling GET on " + url);
+    console.log(employees_service)
+    return this.http.get<employees[]>(url);
   }
 }

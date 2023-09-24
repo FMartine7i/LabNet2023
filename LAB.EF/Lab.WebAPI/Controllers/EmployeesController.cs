@@ -51,8 +51,8 @@ namespace Lab.WebAPI.Controllers
                 {
                     FirstName = employee.FirstName,
                     LastName = employee.LastName,
-                    HireDate = employee.HireDate,
                     City = employee.City,
+                    Country = employee.Country
                 };
 
                 return Ok(eView);
@@ -111,8 +111,8 @@ namespace Lab.WebAPI.Controllers
 
                 eEmployee.FirstName = employee.FirstName;
                 eEmployee.LastName = employee.LastName;
-                eEmployee.HireDate = employee.HireDate;
                 eEmployee.City = employee.City;
+                eEmployee.Country = employee.Country;
 
                 employeesLogic.Update(eEmployee);
                 return StatusCode(HttpStatusCode.NoContent);
