@@ -60,12 +60,12 @@ export class EmployeesComponent implements AfterViewInit {
 
 
   get_all(){
-    console.log('Inside get_all()');
     this._employee_service.get_employees().subscribe({
       next: (result) => {
 
         console.log('API call success');
-
+        
+        this.arr_employees = result;
         this.dataSource.data = result;
 
       },
@@ -82,11 +82,13 @@ export class EmployeesComponent implements AfterViewInit {
 
   edit_employee(EmployeeID:number){
     console.log('Editing employee with ID:', EmployeeID);
-    
+
     const selected_employee = this.arr_employees.find(employee => employee.EmployeeID == EmployeeID);
+    console.log(this.arr_employees);
+
     if(selected_employee){ 
       const dialogRef = this.dialog.open(EmployeeEditComponent, {
-      width: '500px', 
+      width: '350px', 
       data: {employee: selected_employee} 
     });
   
@@ -95,6 +97,9 @@ export class EmployeesComponent implements AfterViewInit {
         this.get_all(); 
       }
     });
+  }
+  else{
+    console.log("employee not selected")
   };
 }
 

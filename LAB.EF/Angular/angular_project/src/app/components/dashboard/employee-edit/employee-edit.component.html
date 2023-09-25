@@ -1,18 +1,43 @@
-<mat-form-field>
-    <mat-label>Enter first name</mat-label>
-    <input matInput [(ngModel)]="employee.FirstName">
+<div class="body-dialog">
+    <div>    
+        <h1>Edit employee</h1>
+           
+        <div class="input-box">
+            <mat-form-field>
+                <mat-label>Enter first name</mat-label>
+                <input matInput [(ngModel)]="employee.FirstName">
+            </mat-form-field>
+        </div>
 
-    <mat-label>Enter last name</mat-label>
-    <input matInput [(ngModel)]="employee.LastName">
+        <div class="input-box">
+            <mat-form-field>
+                <mat-label>Enter last name</mat-label>
+                <input matInput [(ngModel)]="employee.LastName">
+            </mat-form-field>
+        </div>
 
-    <mat-label>City</mat-label>
-    <input matInput [(ngModel)]="employee.City">
+        <div class="input-box">
+            <mat-form-field>
+                <mat-label>City</mat-label>
+                <input matInput [(ngModel)]="employee.City">
+            </mat-form-field>
+        </div>
 
-    <mat-label>Country</mat-label>
-    <input matInput [(ngModel)]="employee.Country">
-</mat-form-field>
+        <div class="input-box">
+            <mat-form-field>
+                <mat-label>Country</mat-label>
+                <input matInput [(ngModel)]="employee.Country">
+            </mat-form-field>
+        </div>
 
-<div mat-dialog-actions>
-    <button mat-button [mat-dialog-close]="employee" cdkFocusInitial>Ok</button>
+        <div class="button-box">
+            <div mat-dialog-actions class="button-box">
+                <button mat-button (click)="onSubmit()" cdkFocusInitial>Ok</button>
+            </div>
+
+            <div mat-dialog-actions class="button-box">
+                <button mat-button (click)="onCancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
 </div>
-

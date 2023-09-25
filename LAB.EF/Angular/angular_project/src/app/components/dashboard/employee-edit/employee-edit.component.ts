@@ -14,10 +14,10 @@ export class EmployeeEditComponent {
   constructor(
     private dialogRef: MatDialogRef<EmployeeEditComponent>,
     @Inject(MAT_DIALOG_DATA) data: any,
-    private _employee_service: employees_service
-  ){
-    this.employee = data.employee;
-  }
+    private _employee_service: employees_service)
+    {
+      this.employee = data.employee;
+    }
 
   onSubmit(){
     this._employee_service.update(this.employee).subscribe({
