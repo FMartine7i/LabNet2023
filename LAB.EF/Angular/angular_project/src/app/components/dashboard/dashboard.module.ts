@@ -7,12 +7,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
 import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
+import { ConfirmationDialogComponent } from './confirmation/confirmation.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    EmployeeEditComponent
+    EmployeeEditComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,

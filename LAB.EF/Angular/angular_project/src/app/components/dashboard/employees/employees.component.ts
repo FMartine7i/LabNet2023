@@ -6,6 +6,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { employees } from 'src/app/core/model/employee-models';
 import { employees_service } from 'src/app/components/service/employees.services.service';
 import { EmployeeEditComponent } from '../employee-edit/employee-edit.component';
+import { ConfirmationDialogComponent } from '../confirmation/confirmation.component';
+import { SuccessDialogComponent } from '../confirmation/succes_dialog.component';
+import { ErrorDialogComponent } from '../confirmation/error_dialog.component';
+
 
 @Component({
   selector: 'app-employees',
@@ -94,18 +98,36 @@ export class EmployeesComponent implements AfterViewInit {
   };
 }
 
-  delete_employee(EmployeeID:number){
-    const confirmation = confirm("Are you sure you want to delete this employee?");
-    if (confirmation) {
+delete_employee(EmployeeID: number) {
+  const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+  dialogRef.afterClosed().subscribe((result) => {
+    if (result) {
       this._employee_service.delete(EmployeeID).subscribe(
         () => {
-          alert('Employee deleted.')
           this.get_all();
-      },
-      (error) =>{
-        console.error('Error: ', error)
-      })
+          this.openSuccessDialog('Employee deleted.');
+        },
+        (error) => {
+          console.error('Error: ', error);
+          this.openErrorDialog('Error deleting employee.');
+        }
+      );
     }
-  }
+  });
+}
+
+private openSuccessDialog(message: string) {
+  this.dialog.open(SuccessDialogComponent, {
+    data: { message },
+  });
+}
+
+private openErrorDialog(message: string) {
+  this.dialog.open(ErrorDialogComponent, {
+    data: { message },
+  });
+}
+
 }
 
