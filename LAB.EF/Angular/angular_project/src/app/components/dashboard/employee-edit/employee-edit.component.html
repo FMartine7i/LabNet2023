@@ -1,0 +1,18 @@
+<mat-form-field>
+    <mat-label>Enter first name</mat-label>
+    <input matInput [(ngModel)]="employee.FirstName">
+
+    <mat-label>Enter last name</mat-label>
+    <input matInput [(ngModel)]="employee.LastName">
+
+    <mat-label>City</mat-label>
+    <input matInput [(ngModel)]="employee.City">
+
+    <mat-label>Country</mat-label>
+    <input matInput [(ngModel)]="employee.Country">
+</mat-form-field>
+
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="employee" cdkFocusInitial>Ok</button>
+</div>
+

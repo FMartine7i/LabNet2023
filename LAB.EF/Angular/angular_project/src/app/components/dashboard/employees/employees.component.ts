@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { employees } from 'src/app/core/model/employee-models';
 import { employees_service } from 'src/app/components/service/employees.services.service';
-import { response_dto } from 'src/app/core/model/response-dto';
+import { EmployeeEditComponent } from '../employee-edit/employee-edit.component';
 
 @Component({
   selector: 'app-employees',
@@ -29,7 +30,10 @@ export class EmployeesComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _employee_service: employees_service) {}
+  constructor(
+    private _employee_service: employees_service,
+    private dialog: MatDialog
+    ) {}
 
   ngOnInit(): void {
     console.log('Calling get_all()');
@@ -50,13 +54,6 @@ export class EmployeesComponent implements AfterViewInit {
     }
   }
 
-  edit_employee(employee_name:string){
-    console.log('Edit: ', employee_name)
-  }
-
-  delete_employee(employee_name:string){
-    console.log('Delete: ', employee_name)
-  }
 
   get_all(){
     console.log('Inside get_all()');
@@ -73,6 +70,42 @@ export class EmployeesComponent implements AfterViewInit {
         console.log('Full Response:', e.error);
       }
     });
+  }
+
+  insert_employee(){
+
+  }
+
+  edit_employee(EmployeeID:number){
+    console.log('Editing employee with ID:', EmployeeID);
+    
+    const selected_employee = this.arr_employees.find(employee => employee.EmployeeID == EmployeeID);
+    if(selected_employee){ 
+      const dialogRef = this.dialog.open(EmployeeEditComponent, {
+      width: '500px', 
+      data: {employee: selected_employee} 
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result && result.success) {
+        this.get_all(); 
+      }
+    });
+  };
+}
+
+  delete_employee(EmployeeID:number){
+    const confirmation = confirm("Are you sure you want to delete this employee?");
+    if (confirmation) {
+      this._employee_service.delete(EmployeeID).subscribe(
+        () => {
+          alert('Employee deleted.')
+          this.get_all();
+      },
+      (error) =>{
+        console.error('Error: ', error)
+      })
+    }
   }
 }
 

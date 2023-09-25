@@ -40,7 +40,7 @@
       </ng-container>
 
       <ng-container matColumnDef="Country">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Hire date </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
         <td mat-cell *matCellDef="let element"> {{element.Country}} </td>
       </ng-container>
 
@@ -51,7 +51,7 @@
           class="button-class" 
           id="edit" 
           style="background-color: #1acbd8"
-          (click)="edit_employee(element.first_name)">
+          (click)="edit_employee(element.EmployeeID)">
             <mat-icon>edit</mat-icon>
           </button>
         </td>

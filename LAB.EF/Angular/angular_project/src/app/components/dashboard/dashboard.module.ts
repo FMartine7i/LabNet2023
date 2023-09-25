@@ -4,13 +4,15 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { HomeComponent } from './home/home.component';
 import { MatButtonModule } from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
+import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    EmployeeEditComponent
   ],
   imports: [
     CommonModule,

@@ -19,14 +19,14 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     LayoutComponent,
     LoginComponent,
-    EmployeesComponent,
+    EmployeesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    HttpClientModule   
+    HttpClientModule  
   ],
   providers: [],
   bootstrap: [AppComponent]
