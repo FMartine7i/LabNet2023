@@ -23,7 +23,7 @@ export class EmployeeEditComponent {
     this._employee_service.update(this.employee).subscribe({
       next: (result) =>{
         console.log('Employee updated', result);
-        this.dialogRef.close({ succes: true });
+        this.dialogRef.close({ success: true });
       },
       error: (error) =>{
         console.error('Error updating employee', error);
@@ -32,6 +32,6 @@ export class EmployeeEditComponent {
   };
 
   onCancel(){
-    this.dialogRef.close({ succes: false });
+    this.dialogRef.close({ success: false });
   }
 }

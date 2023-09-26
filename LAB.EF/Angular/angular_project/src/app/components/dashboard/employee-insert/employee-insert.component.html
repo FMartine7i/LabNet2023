@@ -1,32 +1,32 @@
 <div class="body-dialog">
     <div>    
-        <h1>Edit employee</h1>
+        <h1>Create employee</h1>
 
         <div class="input-box">
             <mat-form-field>
                 <mat-label>Enter first name</mat-label>
-                <input matInput [(ngModel)]="employee.FirstName" required>
+                <input formControlName="FirstName" placeholder="First Name" required>
             </mat-form-field>
         </div>
 
         <div class="input-box">
             <mat-form-field>
                 <mat-label>Enter last name</mat-label>
-                <input matInput [(ngModel)]="employee.LastName" required>
+                <input formControlName="LastName" placeholder="Last Name" required>
             </mat-form-field>
         </div>
 
         <div class="input-box">
             <mat-form-field>
                 <mat-label>City</mat-label>
-                <input matInput [(ngModel)]="employee.City" required>
+                <input matInput formControlName="City" placeholder="City" required>
             </mat-form-field>
         </div>
 
         <div class="input-box">
             <mat-form-field>
                 <mat-label>Country</mat-label>
-                <input matInput [(ngModel)]="employee.Country" required>
+                <input matInput formControlName="Country" placeholder="Country" required>
             </mat-form-field>
         </div>
 

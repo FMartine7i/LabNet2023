@@ -8,13 +8,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
 import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { ConfirmationDialogComponent } from './confirmation/confirmation.component';
+import { EmployeeInsertComponent } from './employee-insert/employee-insert.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     EmployeeEditComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    EmployeeInsertComponent
   ],
   imports: [
     CommonModule,

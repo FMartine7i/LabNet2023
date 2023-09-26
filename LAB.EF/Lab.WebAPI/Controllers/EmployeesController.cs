@@ -12,7 +12,7 @@ using System.Web.Http.Cors;
 
 namespace Lab.WebAPI.Controllers
 {
-    [EnableCors(origins: "http://localhost:4200", headers:"*", methods:"*")]
+    [EnableCors(origins: "http://localhost:4200", headers:"*", methods:"GET, POST, PUT, DELETE, OPTIONS")]
     public class EmployeesController : ApiController
     {
         // GET: api/Employees

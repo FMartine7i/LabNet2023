@@ -28,9 +28,9 @@ export class employees_service {
     return this.http.post<employees>(this.api_url, employee);
   }
 
-  delete(EmployeeID:number): Observable<void>{
+  delete(EmployeeID:number): Observable<employees>{
     let url = `${this.api_url}/employees/${EmployeeID}`
-    return this.http.delete<void>(url);
+    return this.http.delete<employees>(url);
   }
 
   update(employee: employees): Observable<employees>{

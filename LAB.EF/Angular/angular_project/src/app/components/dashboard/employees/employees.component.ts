@@ -9,6 +9,7 @@ import { EmployeeEditComponent } from '../employee-edit/employee-edit.component'
 import { ConfirmationDialogComponent } from '../confirmation/confirmation.component';
 import { SuccessDialogComponent } from '../confirmation/succes_dialog.component';
 import { ErrorDialogComponent } from '../confirmation/error_dialog.component';
+import { EmployeeInsertComponent } from '../employee-insert/employee-insert.component';
 
 
 @Component({
@@ -77,14 +78,22 @@ export class EmployeesComponent implements AfterViewInit {
   }
 
   insert_employee(){
-
+    console.log('creating employee');
+    const dialogRef = this.dialog.open(EmployeeInsertComponent, {
+      width: '350px',
+    });
+    
+    dialogRef.afterClosed().subscribe((result)=>{
+      if( result && result.succes){
+        this.get_all()
+      }
+    })
   }
 
   edit_employee(EmployeeID:number){
     console.log('Editing employee with ID:', EmployeeID);
 
     const selected_employee = this.arr_employees.find(employee => employee.EmployeeID == EmployeeID);
-    console.log(this.arr_employees);
 
     if(selected_employee){ 
       const dialogRef = this.dialog.open(EmployeeEditComponent, {
@@ -95,13 +104,13 @@ export class EmployeesComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result && result.success) {
         this.get_all(); 
-      }
-    });
+        }
+      });
+    }
+    else{
+      console.log("employee not selected")
+    };
   }
-  else{
-    console.log("employee not selected")
-  };
-}
 
 delete_employee(EmployeeID: number) {
   const dialogRef = this.dialog.open(ConfirmationDialogComponent);
