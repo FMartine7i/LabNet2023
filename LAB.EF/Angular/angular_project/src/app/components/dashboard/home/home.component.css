@@ -16,9 +16,10 @@ span{
 
 
 .div-main{   
-    padding-top: 2.5rem;
+    padding-top: 4rem;
     display: flex;
     justify-content: center;
+    padding-bottom: 5rem;
 }
 
 .div-section{
